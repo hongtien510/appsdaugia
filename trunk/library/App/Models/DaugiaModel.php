@@ -183,6 +183,13 @@ class App_Models_DaugiaModel {
 		$data = $this->_db->executeReader($sql);
 		return $data[0]["hoten"];
 	}
+	
+	public function ThucThiTruyVan($sql)
+	{
+		$data = $this->_db->executeReader($sql);
+		return $data;
+	}
+	
 
 	
 

@@ -1,7 +1,11 @@
 $(document).ready(function(){
 	
 	if(getParameterValue('result') == 1)
-		ThongBao("Thêm mới thành công",2000)
+		ThongBao("Thêm mới thành công",2000);
+	if(getParameterValue('result') == 2)
+		ThongBao("Chỉnh sửa thành công",2000);
+	if(getParameterValue('result') == 3)
+		ThongBao("Xóa thành công",2000);
 });
 
 function getParameterValue(name)

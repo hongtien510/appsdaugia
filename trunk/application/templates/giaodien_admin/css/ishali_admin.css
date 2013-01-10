@@ -251,8 +251,10 @@ display:none;
 p.title_tb{width:340px; height:23px; background:#67A769; padding-top:5px; font-size:15px; font-weight:bold; color:white; padding-left:10px; }
 .content_tb{width:330px; background:white; padding:15px 10px 20px; font-size:13px; font-weight:bold;max-height:300px; overflow:auto}
 
-
-
+table.spdg{width:96%;border-collapse: collapse; margin: 15px auto}
+table.spdg tr td{padding:5px; border:1px solid #000; line-height:17px}
+table.spdg tr th{padding:10px 5px 10px 5px; border:1px solid #000; background:#67A769; color:white; font-weight: bold}
+img.adg{width:300px; height:175px; margin-top:10px}
 
 .footer
 {

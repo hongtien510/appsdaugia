@@ -1,0 +1,1 @@
+<?phpclass Admin_QuanlydaugiaController extends App_Controller_AdminController {    public function init() {        parent::init();    }    public function indexAction()	{        $daugia = App_Models_DaugiaModel::getInstance();		echo 'AAAAAAAAAAAa';    }		}

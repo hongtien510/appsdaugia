@@ -190,11 +190,65 @@ class App_Models_DaugiaModel {
 		return $data;
 	}
 	
-
+	public function TachThoiGian($time)
+	{
+		$ng =  substr($time,8,2);
+		$th = substr($time,5,2);
+		$nm = substr($time,0,4);
+		$Ngay = $ng .'-'. $th .'-'. $nm;
+		
+		$Gio = substr($time,11,2);
+		$Phut = substr($time,14,2);
+		
+		$data["ngay"] = $Ngay;
+		$data["gio"] = $Gio;
+		$data["phut"] = $Phut;
+		
+		return $data;
+	}
+	
+	public function GomThoiGian($Ngay, $Gio, $Phut, $Giay)
+	{
+		$y = substr($Ngay,6,4);
+		$th = substr($Ngay,3,2);
+		$ng = substr($Ngay,0,2);
+		
+		$time = $y .'-'. $th .'-'. $ng .' '. $Gio .':'. $Phut .':'. $Giay;
+		
+		return $time;
+	}
 	
 
     
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

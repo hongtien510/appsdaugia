@@ -97,22 +97,9 @@ class App_Models_DaugiaModel {
 		return ceil(($giadau/$giaban)*100);
 	}
 	
-	// public function GetInfoUserFacebook()
-	// {
-		// $facebook = new Ishali_Facebook();
-		// $fb = $facebook->getFB();		
-		// $user = $fb->getUser();	
-		// $pages = $fb->api('/'.$user);
-		// return $pages;
-	// }
 	
-	public function GetIdUserFB()
-	{
-		$facebook = new Ishali_Facebook();
-		$fb = $facebook->getFB();		
-		$user = $fb->getUser();	
-		return $user;
-	}
+	
+	
 	
 	public function DauGia($idpd, $iduser, $giadau)
 	{
@@ -149,9 +136,9 @@ class App_Models_DaugiaModel {
 		return $data;
 	}
 	
-	public function DangKyUser($IdUserFB, $username, $password, $hoten, $sdt, $email, $diachi)
+	public function DangKyUser($IdUserFB, $username, $password, $hoten, $NameUserFB, $LinkFB, $sdt, $email, $diachi)
 	{
-		$sql = "Insert into ishali_bid_user values('NULL', '". $IdUserFB ."', '". $username ."', '". $password ."', '". $hoten ."', '". $sdt ."', '". $email ."', '". $diachi ."')";
+		$sql = "Insert into ishali_bid_user values('NULL', '". $IdUserFB ."', '". $username ."', '". $password ."', '". $hoten ."', '". $NameUserFB ."', '". $LinkFB ."', '". $sdt ."', '". $email ."', '". $diachi ."', now())";
 		
 		$data = $this->_db->executeReader($sql);
 		return $data;
@@ -218,9 +205,30 @@ class App_Models_DaugiaModel {
 		return $time;
 	}
 	
+	public function GetInfoUserByIdUserFB($iduserFB)
+	{
+		$facebook = new Ishali_Facebook();
+		$fb = $facebook->getFB();
+		$info = $fb->api('/'.$iduserFB);
+		return $info;
+	}
+	
+    public function GetInfoUserFacebook()
+	{
+		$facebook = new Ishali_Facebook();
+		$fb = $facebook->getFB();		
+		$user = $fb->getUser();	
+		$pages = $fb->api('/'.$user);
+		return $pages;
+	}
 
-    
-
+	// public function GetIdUserFB()
+	// {
+		// $facebook = new Ishali_Facebook();
+		// $fb = $facebook->getFB();		
+		// $user = $fb->getUser();	
+		// return $user;
+	// }
 
 }
 

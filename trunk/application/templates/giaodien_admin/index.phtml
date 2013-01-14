@@ -13,19 +13,27 @@
 			echo $this->headLink ()
 					// ->appendStylesheet ( $this->baseUrl ('public/css/style.css'))
 					->appendStylesheet ( $this->baseUrl ('application/templates/giaodien_admin/css/ishali_admin.css'))
+					->appendStylesheet ( $this->baseUrl ('application/templates/giaodien_admin/css/jquery-ui.css'))
 					;
 					
 		
 			echo $this->headScript ()
 					->appendFile ( $this->baseUrl ('/application/layouts/tmpl1/js/jquery-1.7.2.min.js') )
-					->appendFile ( $this->baseUrl ('application/templates/giaodien_admin/js/script.js') )
+					->appendFile ( $this->baseUrl ('/application/templates/giaodien_admin/js/script.js') )
+					
+					->appendFile ( $this->baseUrl ('/application/templates/giaodien_admin/js/jquery.min.js') )
+					->appendFile ( $this->baseUrl ('/application/templates/giaodien_admin/js/jquery-ui.min.js') )
+					
+					
 
 					->appendFile ( $this->baseUrl ('/public/ckeditor/ckeditor.js') )
+					->appendFile ( $this->baseUrl ('/public/ckfinder/ckfinder.js') )
 
 					
 					;
 				
 		?>
+		
 		
 		</head>
     <body>

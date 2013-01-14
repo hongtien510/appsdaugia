@@ -233,8 +233,9 @@ h1
 	margin-bottom: 15px;
 }
 
-.inputstyle{width :400px; height:20px; margin-top:10px}
-.textareastyle{width:400px; height:200px; margin-top:10px}
+.inputstyle{width :400px; height:20px; //margin-top:10px}
+.inputstyletg{width :95px; height:20px; //margin-top:10px}
+.textareastyle{width:620px; height:200px; margin-top:10px}
 .nameinput{color:#006633}
 .selectstyle{width:406px; height:27px; margin-top:10px; padding:4px 5px 4px 0}
 
@@ -252,10 +253,11 @@ p.title_tb{width:340px; height:23px; background:#67A769; padding-top:5px; font-s
 .content_tb{width:330px; background:white; padding:15px 10px 20px; font-size:13px; font-weight:bold;max-height:300px; overflow:auto}
 
 table.spdg{width:96%;border-collapse: collapse; margin: 15px auto}
-table.spdg tr td{padding:5px; border:1px solid #000; line-height:17px}
+table.spdg tr td{padding:5px; border:1px solid #000; line-height:17px;}
 table.spdg tr th{padding:10px 5px 10px 5px; border:1px solid #000; background:#67A769; color:white; font-weight: bold}
 img.adg{width:300px; height:175px; margin-top:10px}
 
+td{ border-bottom:1px solid #DBDFE3; padding:5px 0}
 .footer
 {
 	clear: both;

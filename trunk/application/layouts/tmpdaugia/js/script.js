@@ -59,7 +59,7 @@ $(document).ready(function(){
 	});
 	$('.menudangxuat').live('click',function(){
 		$.ajax({
-			url:'http://localhost/tochuccuocthihinh/Ajaxdaugia/dangxuat',
+			url:taaa.appdomain + '/Ajaxdaugia/dangxuat',
 			type:'post',
 			data:{},
 			success:function(data){
@@ -102,7 +102,7 @@ function DauGia(ops)
 // alert(ops.giadau);
 // return false;
 	$.ajax({
-		url:'http://localhost/tochuccuocthihinh/Ajaxdaugia',
+		url:taaa.appdomain + '/Ajaxdaugia',
 		type:'post',
 		data:{idpd:ops.idpd, iduser:ops.iduser, giadau:ops.giadau},
 		success:function(data){
@@ -114,7 +114,7 @@ function DauGia(ops)
 function DanhSachDauGia(ops)
 {
 	$.ajax({
-		url:'http://localhost/tochuccuocthihinh/Ajaxdaugia/dsdaugia',
+		url:taaa.appdomain + '/Ajaxdaugia/dsdaugia',
 		type:'post',
 		data:{idpd:ops.idpd},
 		success:function(data){
@@ -128,7 +128,7 @@ function DanhSachDauGia(ops)
 function KiemTraDangNhap()
 {
 		$.ajax({
-		url:'http://localhost/tochuccuocthihinh/Ajaxdaugia/kiemtradangnhap',
+		url:taaa.appdomain + '/Ajaxdaugia/kiemtradangnhap',
 		type:'post',
 		data:{},
 		success:function(data){
@@ -167,7 +167,7 @@ function DangNhap(ops)
 		return false;
 	}
 	$.ajax({
-		url:'http://localhost/tochuccuocthihinh/Ajaxdaugia/dangnhap',
+		url:taaa.appdomain + '/Ajaxdaugia/dangnhap',
 		type:'post',
 		data:{username:ops.username, password:ops.password, IdUserFB:ops.IdUserFB},
 		success:function(data){
@@ -216,7 +216,7 @@ function KiemTraDangKy(ops)
 	// alert(IdUserFB);alert(hoten);alert(username);alert(password);alert(repassword);alert(sdt);alert(email);alert(diachi);
 	// return false;
 	$.ajax({
-		url:'http://localhost/tochuccuocthihinh/Ajaxdaugia/kiemtrathongtindangky',
+		url:taaa.appdomain + '/Ajaxdaugia/kiemtrathongtindangky',
 		type:'post',
 		data:{IdUserFB:IdUserFB, username:username},
 		success:function(data){
@@ -295,7 +295,7 @@ function HienThiFormDangKy()
 function DangKy(IdUserFB, username, password, hoten, sdt, email, diachi)
 {
 	$.ajax({
-		url:'http://localhost/tochuccuocthihinh/Ajaxdaugia/dangky',
+		url:taaa.appdomain + '/Ajaxdaugia/dangky',
 		type:'post',
 		data:{IdUserFB:IdUserFB, username:username, password:password, hoten:hoten, sdt:sdt, email:email, diachi:diachi },
 		success:function(data){

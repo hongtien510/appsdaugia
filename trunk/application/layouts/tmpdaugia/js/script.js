@@ -204,6 +204,8 @@ function KiemTraDangKy(ops)
 {
 
 	var IdUserFB = ops.IdUserFB;
+	var NameUserFB = ops.NameUserFB;
+	var LinkFB = ops.LinkFB;
 	//var IdUserFB = 123456789;
 	var username = ops.username;
 	var hoten = ops.hoten;
@@ -213,6 +215,7 @@ function KiemTraDangKy(ops)
 	var email = ops.email;
 	var diachi = ops.diachi;
 
+	// alert(NameUserFB);
 	// alert(IdUserFB);alert(hoten);alert(username);alert(password);alert(repassword);alert(sdt);alert(email);alert(diachi);
 	// return false;
 	$.ajax({
@@ -263,7 +266,7 @@ function KiemTraDangKy(ops)
 				else
 				{
 					$('span.loidangky').html("");
-					DangKy(IdUserFB, username, password, hoten, sdt, email, diachi);
+					DangKy(IdUserFB, NameUserFB, LinkFB, username, password, hoten, sdt, email, diachi);
 					
 				}
 			}
@@ -287,18 +290,19 @@ function HienThiFormDangKy()
 	str +="<tr><td>Số Điện Thoại</td><td><input class='inputstyle' type='text' id='sdt' name='sdt'/></td></tr>";
 	str +="<tr><td>Email</td><td><input class='inputstyle' type='text' id='email' name='email'/></td></tr>";
 	str +="<tr><td>Địa Chỉ</td><td><input class='inputstyle' type='text' id='diachi' name='diachi'/></td></tr>";
-	str +="<tr><td><a class='btnlogin' href='javascript:;'>Đăng Nhập</a></td><td><input type='button' class='btndangky inputstyle2' value='Đăng Ký' onclick=\"KiemTraDangKy({IdUserFB:document.getElementById('IdUserFB').value, hoten:document.getElementById('hoten').value, username:document.getElementById('username').value, password:document.getElementById('password').value, repassword:document.getElementById('repassword').value, sdt:document.getElementById('sdt').value, email:document.getElementById('email').value, diachi:document.getElementById('diachi').value})\"/></td></tr>";
+	str +="<tr><td><a class='btnlogin' href='javascript:;'>Đăng Nhập</a></td><td><input type='button' class='btndangky inputstyle2' value='Đăng Ký' onclick=\"KiemTraDangKy({IdUserFB:document.getElementById('IdUserFB').value, NameUserFB:document.getElementById('NameUserFB').value, LinkFB:document.getElementById('LinkFB').value, hoten:document.getElementById('hoten').value, username:document.getElementById('username').value, password:document.getElementById('password').value, repassword:document.getElementById('repassword').value, sdt:document.getElementById('sdt').value, email:document.getElementById('email').value, diachi:document.getElementById('diachi').value})\"/></td></tr>";
 	str +="<tr><td colspan='2'><span class='loidangky'></span></td></tr></table></div>";
 	$('#thongbao').html(str);
 }
 
-function DangKy(IdUserFB, username, password, hoten, sdt, email, diachi)
+function DangKy(IdUserFB, NameUserFB, LinkFB, username, password, hoten, sdt, email, diachi)
 {
 	$.ajax({
 		url:taaa.appdomain + '/Ajaxdaugia/dangky',
 		type:'post',
-		data:{IdUserFB:IdUserFB, username:username, password:password, hoten:hoten, sdt:sdt, email:email, diachi:diachi },
+		data:{IdUserFB:IdUserFB, NameUserFB:NameUserFB, LinkFB:LinkFB, username:username, password:password, hoten:hoten, sdt:sdt, email:email, diachi:diachi },
 		success:function(data){
+		//alert(data);
 			ThongBao(data,2000);
 		}
 	});		

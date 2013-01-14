@@ -1,0 +1,1 @@
+<?phpclass Admin_UserController extends App_Controller_AdminController {    public function init() {        parent::init();    }    public function indexAction() {        $daugia = App_Models_DaugiaModel::getInstance();				$sql = "Select * From ishali_bid_user order by iduser desc";				$user = $daugia-> ThucThiTruyVan($sql);		$this->view->user = $user;    }}

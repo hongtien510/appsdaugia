@@ -28,9 +28,9 @@ class AjaxdaugiaController extends App_Controller_FrontController {
 		$daugia = App_Models_DaugiaModel::getInstance();
 		
 		$idpd = $_POST["idpd"];
-		$data = $daugia->DanhSachDauGia(1);
+		$data = $daugia->DanhSachDauGia($idpd);
 		//$result="";
-		$str = "<p class='title_tb'>Danh sách người đấu giá</p><div class='content_tb'><table class='dsdaugia'><tr><th width='125'>Tên</th><th>Giá Đấu</th><th width='125'>Thời Gian Đấu</th></tr>";
+		$str = "<p class='title_tb'>Danh sách người đấu giá</p><div class='content_tb'><table class='dsdaugia'><tr><th width='160'>Tên</th><th>Giá Đấu</th><th width='125'>Thời Gian Đấu</th></tr>";
 		for($i=0; $i<count($data); $i++)
 		{
 			$tgdau = $daugia->CatThoigian2($data[$i]["thoigiandau"]);
@@ -118,14 +118,18 @@ class AjaxdaugiaController extends App_Controller_FrontController {
 		$daugia = App_Models_DaugiaModel::getInstance();
 		
 		$IdUserFB = $_POST["IdUserFB"];
+		$NameUserFB = $_POST["NameUserFB"];
+		$LinkFB = $_POST["LinkFB"];
 		$username = $_POST["username"];
 		$password = sha1($_POST["password"]);
 		$hoten = $_POST["hoten"];
 		$sdt = $_POST["sdt"];
 		$email = $_POST["email"];
 		$diachi = $_POST["diachi"];
+		//exit;
 		
-		$daugia->DangKyUser($IdUserFB, $username, $password, $hoten, $sdt, $email, $diachi);
+		
+		$daugia->DangKyUser($IdUserFB, $username, $password, $hoten, $NameUserFB, $LinkFB, $sdt, $email, $diachi);
 		echo "Đăng ký thành công";
 		//echo $IdUserFB.'     '.$username.'     '.$password.'     '.$hoten.'     '.$sdt.'     '.$email.'     '.$diachi;
 	}

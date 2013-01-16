@@ -38,7 +38,8 @@ class App_Controller_FrontController extends Zend_Controller_Action {
         /*
          * get page info
          */
-         
+   
+		// exit;	
          if($this->view->id_fb_page <= 0)
          {
        		   $this->view->id_fb_page =  $_SESSION['idpage'];

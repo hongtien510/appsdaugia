@@ -1,0 +1,88 @@
+<?php
+	$dg = App_Models_DaugiaModel::getInstance();
+	$ShowPhienDau = $this->ShowPhienDau;
+	$NguoiDauCaoNhat = $this->NguoiDauCaoNhat;
+	$iduser = $dg->GetIdUserByIdUserFB();
+	
+
+
+	// $facebook = new Ishali_Facebook();
+	// $fb = $facebook->getFB();		
+	// $pages = $fb->api('/me');
+?>
+
+<div id="daugia">
+		<img class="main_img" src="<?php echo APP_DOMAIN . '/application/layouts/' . $this->page->templates . '/images/upload/images/' . $ShowPhienDau[0]["urlhinh"] ?>" alt="nem" title="nem">
+		<div id="content_dg">
+			<span class="textstyle1">Bắt đầu : </span> 
+				<span class="textstyle2"><?php echo $dg->CatThoigian($ShowPhienDau[0]["tgbatdau"])?></span></br>
+			<span class="textstyle1">Kết thúc : </span> 
+				<span class="textstyle2"><?php echo $dg->CatThoigian($ShowPhienDau[0]["tgketthuc"])?></span></br>
+			<span class="textstyle1">Giá tham khảo : </span> 
+				<span class="textstyle2 gtk"><?php echo number_format($ShowPhienDau[0]["giaban"],0,',','.')?>đ</span></br>
+			<span class="textstyle1">Tiết kiệm : </span> 
+				<span class="textstyle2"><?php if(!isset($NguoiDauCaoNhat[0]["giadau"])) echo number_format(($ShowPhienDau[0]["giaban"] - $ShowPhienDau[0]["giakhoidiem"]),0,',','.'); else echo number_format(($ShowPhienDau[0]["giaban"] - $NguoiDauCaoNhat[0]["giadau"]),0,',','.') ?>đ (<?php if(!isset($NguoiDauCaoNhat[0]["giadau"])) echo $dg->TinhPhanTramGiam($ShowPhienDau[0]["giaban"],($ShowPhienDau[0]["giaban"] - $ShowPhienDau[0]["giakhoidiem"])); else echo $dg->TinhPhanTramGiam($ShowPhienDau[0]["giaban"],($ShowPhienDau[0]["giaban"] - $NguoiDauCaoNhat[0]["giadau"]));?>%)</span></br>
+			<p class="timebid"><span class="textstyle1">Mới kết thúc</span></p>
+			<span class="giabid"><?php if(!isset($NguoiDauCaoNhat[0]["giadau"])) echo number_format($ShowPhienDau[0]["giakhoidiem"],0,',','.'); else echo number_format($NguoiDauCaoNhat[0]["giadau"],0,',','.')?>đ</span></br>
+			<span class="textstyle1">Người dấu giá cuối : </span> 
+			<span class="nguoibid">
+			<?php 
+				
+				if(!isset($NguoiDauCaoNhat[0]["iduser"])) 
+				{
+					echo "";
+				}
+				else 
+				{
+					echo $NguoiDauCaoNhat[0]["hoten"];
+				}
+
+			?>
+			</span></br>
+			<?php
+			if(!isset($NguoiDauCaoNhat[0]["giadau"]))
+			{
+				$giadau = $ShowPhienDau[0]["giakhoidiem"] + $ShowPhienDau[0]["buocgia"];
+			}
+			else
+			{
+				$giadau = $NguoiDauCaoNhat[0]["giadau"] + $ShowPhienDau[0]["buocgia"];
+			}
+			?>
+			<input class="price"  readonly="true" type="text" id="pricebid" name="pricebid" value="<?php echo number_format($giadau,0,',','.');?>đ"/>
+			<!--<input type="button" name="daugia" value="Đấu giá" onclick = "return confirm('Bạn có chắc chắn muốn đấu giá'); DauGia({idpd:'<?php echo $ShowPhienDau[0]["idpd"]?>', iduser:'<?php echo $UserFB["id"]; ?>', giadau:'<?php echo $giadau;?>'})"/></br>-->
+			<input type="button" class="btn_daugia" name="daugia" value="Đấu giá" /></br>
+			
+			<input type="hidden" id="hd_idpd" value="<?php echo $ShowPhienDau[0]["idpd"]?>"/>
+			<!--<input type="hidden" id="hd_iduser" value="<?php echo $UserFB["id"]; ?>"/>-->
+			<input type="hidden" id="hd_iduser" value="<?php echo $iduser[0]["iduser"]; ?>"/>
+			<input type="hidden" id="hd_idgd" value="<?php echo $giadau; ?>"/>
+			
+			<a class="dsnguoibid" href="javascript:;" onclick = "DanhSachDauGia({idpd:<?php echo $ShowPhienDau[0]["idpd"]?>})">Danh sách người đấu giá</a>
+			<p class="chiase">
+				<iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fthegioinem.com%2Fhome%2F&amp;send=false&amp;layout=button_count&amp;width=85&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:85px; height:21px;" allowTransparency="true"></iframe>
+				<a title="Chia sẻ lên Zing Me" target="_blank" href="http://link.apps.zing.vn/share?u="><img src="http://static2.news.zing.vn/v3/images/small_zing_icon.png"></a>
+				<a title="Chia sẻ trên Google" target="_blank" href="https://plus.google.com/share?url="><img alt="Google +1" src="http://static2.news.zing.vn/v3/images/icon_googleplus.jpg"></a>
+				<a title="Chia sẻ trên Facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u="><img alt="Facebook" src="http://static2.news.zing.vn/v3/images/icon_facebook.png"></a>
+				<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://thegioinem.com">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+			</p>
+		</div>
+	</div>
+	<div id="detail">
+		<div id="menutab">
+			<ul class="menutab">
+				<li class="mb_gioithieu active" ><a href="javascript:;">Giới thiệu</a></li>
+				<li class="mb_thongso"><a href="javascript:;">Thông số</a></li>
+				<li class="mb_hinhanh"><a href="javascript:;">Hình ảnh</a></li>
+				<li class="mb_video" ><a href="javascript:;">Video</a></li>
+			</ul>
+		</div>
+		<div id="listtab">
+			<div id="tabgioithieu"><?php echo $ShowPhienDau[0]["gioithieu"]?></div><!--End #tabgioithieu-->
+			<div id="tabthongso"><?php echo $ShowPhienDau[0]["thongso"]?></div><!--End #tabthongso-->
+			<div id="tabhinhanh"><?php echo $ShowPhienDau[0]["hinhanh"]?></div><!--End #tabhinhanh-->
+			<div id="tabvideo"><?php echo $ShowPhienDau[0]["video"]?></div><!--End #tabvideo-->
+		</div>
+	</div>
+	

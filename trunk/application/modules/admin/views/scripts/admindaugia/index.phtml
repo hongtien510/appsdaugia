@@ -1,0 +1,65 @@
+<form action = "admindaugia/xulythemsanpham" method = "post" enctype="multipart/form-data">
+<table width="100%">
+	<tr>
+		<td width="100"><span class="nameinput">Tên Sản Phẩm: </span></td>
+		<td><input class="inputstyle" type="text" name="tensp"/></td>
+	</tr>
+	<tr>
+		<td><span class="nameinput">Giá Bán: </span></td>
+		<td><input class="inputstyle" type="text" name="giaban"/></td>
+	</tr>
+	<tr>
+		<td><span class="nameinput">Upload Hình Ảnh: </span></td>
+		<td><input size="50" style="margin-top:10px" type="file" name="uploadhinhanh"/></td>
+	</tr>
+	<tr>
+		<td valign = "top"><span class="nameinput">Giới Thiệu: </span></td>
+		<td><textarea id="ckgioithieu" class="textareastyle" type="text" name="gioithieu"></textarea></td>
+	</tr>
+	<tr>
+		<td valign = "top"><span class="nameinput">Thông Số: </span></td>
+		<td><textarea id="ckthongso" class="textareastyle" type="text" name="thongso"></textarea></td>
+	</tr>
+	<tr>
+		<td valign = "top"><span class="nameinput">Hình Ảnh: </span></td>
+		<td><textarea id="ckhinhanh" class="textareastyle" type="text" name="hinhanh"></textarea></td>
+	</tr>
+	<tr>
+		<td valign = "top"><span class="nameinput">Video: </span></td>
+		<td><textarea id="ckvideo" class="textareastyle" type="text" name="video"></textarea></td>
+	</tr>
+</table>
+<input type="submit" name="btnsubmit" value="Thêm Sản Phẩm"/>
+
+</form>
+
+<script>
+	
+	var editor1 = CKEDITOR.replace( 'ckgioithieu' );
+	CKFinder.setupCKEditor( editor1, '../public/ckfinder/' ) ;
+	
+	var editor1 = CKEDITOR.replace( 'ckthongso' );
+	CKFinder.setupCKEditor( editor1, '../public/ckfinder/' ) ;
+	
+	var editor1 = CKEDITOR.replace( 'ckhinhanh' );
+	CKFinder.setupCKEditor( editor1, '../public/ckfinder/' ) ;
+	
+	var editor1 = CKEDITOR.replace( 'ckvideo' );
+	CKFinder.setupCKEditor( editor1, '../public/ckfinder/' ) ;
+	
+	
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

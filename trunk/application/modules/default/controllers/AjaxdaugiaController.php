@@ -149,8 +149,8 @@ class AjaxdaugiaController extends App_Controller_FrontController {
 		$this->_helper->layout->disableLayout();
 		$daugia = App_Models_DaugiaModel::getInstance();
 		
-        //$idPD = $_POST["idPD"];
-        $idPD = 19;
+        $idPD = $_POST["idPD"];
+        //echo $idPD = 19;
         $sql = "Select tgketthuc From ishali_bid_phiendau where idPD = " . $idPD;
         $data = $daugia->ThucThiTruyVan($sql);
         
@@ -165,4 +165,21 @@ class AjaxdaugiaController extends App_Controller_FrontController {
         $kq=array('result'=>$result);
         echo Zend_Json::encode($kq);
 	}
+    
+    public function kiemtralandaugiaAction() {
+		$this->_helper->viewRenderer->setNoRender(true);
+		$this->_helper->layout->disableLayout();
+		$daugia = App_Models_DaugiaModel::getInstance();
+        
+        $idPD = @$_POST["idpd"];
+        $idUser = @$_POST["iduser"];
+        
+        $sql = "SELECT MAX( giadau ), iduser FROM ishali_bid_daugia WHERE idpd = ". $idPD;
+        $data = $daugia->ThucThiTruyVan($sql);
+        
+        if ($data[0]["iduser"]==$idUser)
+            echo "0";
+        else
+            echo "1";
+    }
 }

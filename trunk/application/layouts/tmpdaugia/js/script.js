@@ -42,10 +42,7 @@ $(document).ready(function(){
 	
 	
 	
-	$('.btn_daugia').click(function(){
-		//ThongBaoDauGia();
-			KiemTraDangNhap();
-	});
+	
 
 	$('.btnregister').live('click',function(){
 		HienThiFormDangKy();
@@ -74,23 +71,91 @@ $(document).ready(function(){
 		$('#bg_thongbao').hide();
 		$('#thongbao').hide();
 	});
+    
+    $('.btn_daugiaa').click(function(){
+		//ThongBaoDauGia();
+			KiemTraDangNhap();
+	});
 });
 
-
-
-function ThongBao(nd,time)
+function ClickDauGia(ops)
 {
-	$('#bg_thongbao').show();
-	$('#thongbao').show();
-	$('#thongbao').html("<p class='title_tb'>Thông báo</p><div class='content_tb'>"+nd+"</div>");
-	myVar = setTimeout(function(){$('#thongbao').hide(); $('#bg_thongbao').hide();return false},time);
+    idPD = ops.idpd;
+    idUser = ops.iduser;
+    //alert(idPD);
+    //alert(idUser);
+    
+    KiemTraDangNhap(idPD, idUser);
 }
 
 
-function HuyDauGia()
+function KiemTraDangNhap(idPD, idUser)
 {
-	$('#bg_thongbao').hide();
-	$('#thongbao').hide();
+		$.ajax({
+		url:taaa.appdomain + '/Ajaxdaugia/kiemtradangnhap',
+		type:'post',
+		data:{},
+		success:function(data){
+			var obj = jQuery.parseJSON(data);
+			if(obj.result==0)
+			{
+				//ThongBao("Bạn cần phải đăng nhập trước khi đấu giá",1500);	
+				HienFormDangNhap();
+			}
+			else
+			{
+			     //alert('qqqqqqqqqqqqqq');
+                KiemTraTGKetThucPD(idPD, idUser);           
+			}
+		}
+	});		
+}
+
+function KiemTraTGKetThucPD(idPD, idUser)
+{
+
+    $.ajax({
+		url:taaa.appdomain + '/Ajaxdaugia/kiemtraketthucphiendau',
+		type:'post',
+		data:{idPD:idPD},
+		success:function(data){
+        
+			var obj = jQuery.parseJSON(data);
+            if (obj.result==1)
+            {
+                KiemTraLanDauGia(idPD, idUser);
+                //
+            }
+            else
+            {
+                ThongBao("Thời gian đấu giá kết thúc",2000);
+                window.location.reload();
+            }
+		}
+	});
+    return false;	
+}
+
+function KiemTraLanDauGia(idPD, idUser)
+{
+    //alert(idPD);
+    //alert(idUser);
+    
+    $.ajax({
+		url:taaa.appdomain + '/Ajaxdaugia/kiemtralandaugia',
+		type:'post',
+		data:{idpd:idPD, iduser:idUser},
+		success:function(data){
+		  if(data==1)
+          {
+                ThongBaoDauGia();
+          }
+          else
+          {
+                ThongBao("Bạn đang nắm giữ giá đấu cao nhất",2000);
+          }
+		}
+	});	  
 }
 
 function ThongBaoDauGia()
@@ -98,6 +163,12 @@ function ThongBaoDauGia()
 	$('#bg_thongbao').show();
 	$('#thongbao').show();
 	$('#thongbao').html("<p class='title_tb'>Thông báo</p><div class='content_tb'>Bạn có thực sự muốn đấu giá này</br><input type='button' class='dongybid' id='dongybid' value='Đồng Ý' onclick=\"DauGia({idpd:document.getElementById('hd_idpd').value, iduser:document.getElementById('hd_iduser').value, giadau:document.getElementById('hd_idgd').value})\"/><input type='button' class='huybid' id='huybid' value='Không Đồng Ý' onclick=\"HuyDauGia()\"/></div>");
+}
+
+function HuyDauGia()
+{
+	$('#bg_thongbao').hide();
+	$('#thongbao').hide();
 }
 
 function DauGia(ops)
@@ -116,6 +187,7 @@ function DauGia(ops)
 		}
 	});	
 }
+
 function DanhSachDauGia(ops)
 {
 	$.ajax({
@@ -130,47 +202,19 @@ function DanhSachDauGia(ops)
 	});	
 }
 
-function KiemTraDangNhap()
+
+
+function ThongBao(nd,time)
 {
-		$.ajax({
-		url:taaa.appdomain + '/Ajaxdaugia/kiemtradangnhap',
-		type:'post',
-		data:{},
-		success:function(data){
-			var obj = jQuery.parseJSON(data);
-			if(obj.result==0)
-			{
-				//ThongBao("Bạn cần phải đăng nhập trước khi đấu giá",1500);	
-				HienFormDangNhap();
-			}
-			else
-			{
-                KiemTraTGKetThucPD();           
-			}
-		}
-	});		
+	$('#bg_thongbao').show();
+	$('#thongbao').show();
+	$('#thongbao').html("<p class='title_tb'>Thông báo</p><div class='content_tb'>"+nd+"</div>");
+	myVar = setTimeout(function(){$('#thongbao').hide(); $('#bg_thongbao').hide();return false},time);
 }
 
-function KiemTraTGKetThucPD()
-{
-    $.ajax({
-		url:taaa.appdomain + '/Ajaxdaugia/kiemtraketthucphiendau',
-		type:'post',
-		data:{},
-		success:function(data){
-			var obj = jQuery.parseJSON(data);
-            if (obj.result==1)
-            {
-                ThongBaoDauGia();
-            }
-            else
-            {
-                ThongBao("Thời gian đầu giá đã kết thúc",2000);
-                window.location.reload();
-            }
-		}
-	});		
-}
+
+
+
 
 function HienFormDangNhap()
 {

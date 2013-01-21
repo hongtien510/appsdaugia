@@ -153,11 +153,10 @@ li.username ul{display:none}
 li.username:hover ul{display:block}
 
 
+.commentFB{margin-left:20px; margin-top:20px}
+img.lammoi{width:25px; height:25px; position:relative; top:2px; left:10px}
 
-
-
-
-
+.pdketthuc{color:red; font-weight:bold; font-size:15px}
 
 
 

@@ -14,6 +14,7 @@ class ProductController extends App_Controller_FrontController {
 		
 		$this->view->ShowPhienDau = $ShowPhienDau;
 		$this->view->NguoiDauCaoNhat = $NguoiDauCaoNhat;
+        
 
     }
 

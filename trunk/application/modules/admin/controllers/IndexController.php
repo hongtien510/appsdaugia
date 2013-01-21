@@ -4,9 +4,11 @@ class Admin_IndexController extends App_Controller_AdminController {
 
     public function init() {
         parent::init();
+        
     }
 
     public function indexAction() {
+        
         $facebookadmin = new Ishali_FacebookAdmin();  
         $facebook = new Ishali_Facebook();  
 		$facebook->begins_works('1');

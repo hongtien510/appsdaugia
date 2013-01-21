@@ -143,4 +143,26 @@ class AjaxdaugiaController extends App_Controller_FrontController {
 		echo ($data);
 		//echo $this->_SESSION->iduser;
 	}
+    
+    public function kiemtraketthucphiendauAction() {
+		$this->_helper->viewRenderer->setNoRender(true);
+		$this->_helper->layout->disableLayout();
+		$daugia = App_Models_DaugiaModel::getInstance();
+		
+        //$idPD = $_POST["idPD"];
+        $idPD = 19;
+        $sql = "Select tgketthuc From ishali_bid_phiendau where idPD = " . $idPD;
+        $data = $daugia->ThucThiTruyVan($sql);
+        
+        $TGKetThuc = $data[0]["tgketthuc"].'<br/>';
+        $datenow = date("Y-m-d H:i:s");
+        
+        if($TGKetThuc>$datenow)
+            $result = 1;
+        else
+            $result = 0;
+            
+        $kq=array('result'=>$result);
+        echo Zend_Json::encode($kq);
+	}
 }

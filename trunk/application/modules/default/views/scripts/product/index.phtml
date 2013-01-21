@@ -16,6 +16,7 @@
 <div id="daugia">
 		<img class="main_img" src="<?php echo APP_DOMAIN . '/application/layouts/' . $this->page->templates . '/images/upload/images/' . $ShowPhienDau[0]["urlhinh"] ?>" alt="nem" title="nem">
 		<div id="content_dg">
+            <span class="textstyle2"><?php echo $ShowPhienDau[0]["tensp"]?></span><br />
 			<span class="textstyle1">Bắt đầu : </span> 
 				<span class="textstyle2"><?php echo $dg->CatThoigian($ShowPhienDau[0]["tgbatdau"])?></span></br>
 			<span class="textstyle1">Kết thúc : </span> 
@@ -24,13 +25,18 @@
 				<span class="textstyle2 gtk"><?php echo number_format($ShowPhienDau[0]["giaban"],0,',','.')?>đ</span></br>
 			<span class="textstyle1">Tiết kiệm : </span> 
 				<span class="textstyle2"><?php if(!isset($NguoiDauCaoNhat[0]["giadau"])) echo number_format(($ShowPhienDau[0]["giaban"] - $ShowPhienDau[0]["giakhoidiem"]),0,',','.'); else echo number_format(($ShowPhienDau[0]["giaban"] - $NguoiDauCaoNhat[0]["giadau"]),0,',','.') ?>đ (<?php if(!isset($NguoiDauCaoNhat[0]["giadau"])) echo $dg->TinhPhanTramGiam($ShowPhienDau[0]["giaban"],($ShowPhienDau[0]["giaban"] - $ShowPhienDau[0]["giakhoidiem"])); else echo $dg->TinhPhanTramGiam($ShowPhienDau[0]["giaban"],($ShowPhienDau[0]["giaban"] - $NguoiDauCaoNhat[0]["giadau"]));?>%)</span></br>
-			<p class="timebid"><span class="textstyle1"></span></p><br />
+			<p class="timebid"><span class="textstyle1"></span></p>
 			<span class="giabid"><?php if(!isset($NguoiDauCaoNhat[0]["giadau"])) echo number_format($ShowPhienDau[0]["giakhoidiem"],0,',','.'); else echo number_format($NguoiDauCaoNhat[0]["giadau"],0,',','.')?>đ</span>
             
-            
+            <?php 
+                $datenow = date("Y-m-d H:i:s");
+                if($ShowPhienDau[0]["tgketthuc"]>$datenow)
+                
+                {
+            ?>
             <a href="<?php echo $LinkAppHost ?>"><img class="lammoi" src="<?php echo APP_DOMAIN . '/application/layouts/' . $this->page->templates . '/images/refresh.png'?>" alt="Refresh" title="Làm mới giá đấu"/></a>
-            
-            </br>
+            <?php } ?>
+            <br/>
 			<span class="textstyle1">Người dấu giá cuối : </span> 
 			<span class="nguoibid">
 			<?php 
@@ -45,7 +51,7 @@
 				}
 
 			?>
-			</span></br>
+			</span><br/>
 			<?php
 			if(!isset($NguoiDauCaoNhat[0]["giadau"]))
 			{

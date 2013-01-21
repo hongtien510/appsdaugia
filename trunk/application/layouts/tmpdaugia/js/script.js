@@ -99,6 +99,7 @@ function ThongBaoDauGia()
 	$('#thongbao').show();
 	$('#thongbao').html("<p class='title_tb'>Thông báo</p><div class='content_tb'>Bạn có thực sự muốn đấu giá này</br><input type='button' class='dongybid' id='dongybid' value='Đồng Ý' onclick=\"DauGia({idpd:document.getElementById('hd_idpd').value, iduser:document.getElementById('hd_iduser').value, giadau:document.getElementById('hd_idgd').value})\"/><input type='button' class='huybid' id='huybid' value='Không Đồng Ý' onclick=\"HuyDauGia()\"/></div>");
 }
+
 function DauGia(ops)
 {
 // alert(ops.idpd);
@@ -139,18 +140,38 @@ function KiemTraDangNhap()
 			var obj = jQuery.parseJSON(data);
 			if(obj.result==0)
 			{
-				//ThongBao("Bạn cần phải đăng nhập trước khi đấu giá",1500);
-				
+				//ThongBao("Bạn cần phải đăng nhập trước khi đấu giá",1500);	
 				HienFormDangNhap();
 			}
 			else
 			{
-				//ThongBao("Bạn đã đăng nhập",1500);
-				ThongBaoDauGia();
+                KiemTraTGKetThucPD();           
 			}
 		}
 	});		
 }
+
+function KiemTraTGKetThucPD()
+{
+    $.ajax({
+		url:taaa.appdomain + '/Ajaxdaugia/kiemtraketthucphiendau',
+		type:'post',
+		data:{},
+		success:function(data){
+			var obj = jQuery.parseJSON(data);
+            if (obj.result==1)
+            {
+                ThongBaoDauGia();
+            }
+            else
+            {
+                ThongBao("Thời gian đầu giá đã kết thúc",2000);
+                window.location.reload();
+            }
+		}
+	});		
+}
+
 function HienFormDangNhap()
 {
 	$('#bg_thongbao').show();

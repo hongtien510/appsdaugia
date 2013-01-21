@@ -7,21 +7,20 @@ $(document).ready(function(){
 	if(getParameterValue('result') == 3)
 		ThongBao("Xóa thành công",2000);
         
-  //
-//    $('.btLoginAdmin').click(function(){
-//        
-//        //alert(taaa.appdomain);//http://localhost/appfb/ishalidaugia
-//        $.ajax({
-//			url:taaa.appdomain + '/admin/loginadmin/xulylogin',
-//			type:'post',
-//			data:{},
-//			success:function(data){
-//				ThongBao("B?n dã dang xu?t kh?i ?ng d?ng",1500);
-//				$('li.username').html("<a class='menudangnhap' href='javascript:;'>Ðang Nh?p</a>");
-//			}
-//		});	
-//        
-//    });
+  
+    $('.dangxuatadmin').click(function(){
+        
+        $.ajax({
+		url:taaa.appdomain + '/admin/loginadmin/xulydangxuat',
+		type:'post',
+		data:{},
+		success:function(data){
+		  //alert(data);
+            alert("Đăng xuất thành công");
+            window.location="../admin";
+		}
+	   });	
+    });
 });
 
 function LoginAdmin(ops)

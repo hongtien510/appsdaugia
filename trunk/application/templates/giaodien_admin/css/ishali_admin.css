@@ -195,8 +195,8 @@ h1
     display: inline-block;
     float: left;
     margin-top: 4px;
-    padding: 0 10px;
-    margin-right: 5px;
+    padding: 0 8px;
+    //margin-right: 5px;
     cursor: pointer;
  	font-weight: bold;
 }
@@ -204,9 +204,9 @@ h1
 .list_menu ul li a
 {
 	text-decoration: none;	
-	color: white;
+	color: #006633;
 }
-
+.list_menu ul li a:hover{text-decoration: underline;}
 .list_menu ul li.active, .list_menu ul li:hover
 {
 	background: none repeat scroll 0 0 #FFFFFF;

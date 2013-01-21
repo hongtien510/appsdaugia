@@ -182,6 +182,7 @@ function DauGia(ops)
 		type:'post',
 		data:{idpd:ops.idpd, iduser:ops.iduser, giadau:ops.giadau},
 		success:function(data){
+		  //alert(data);
 			ThongBao("Bạn đã đấu giá thành công",1500);
 			location.reload(true);
 		}

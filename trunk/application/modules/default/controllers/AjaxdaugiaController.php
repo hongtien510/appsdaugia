@@ -15,9 +15,10 @@ class AjaxdaugiaController extends App_Controller_FrontController {
 		$idpd = $_POST["idpd"];
 		$iduser = $_POST["iduser"];
 		$giadau = $_POST["giadau"];
+		//$ip = $daugia->getRemoteIPAddress();
+        $ip = "192.168.1.1";
 		
-		
-		$daugia->DauGia($idpd, $iduser, $giadau);
+		$daugia->DauGia($idpd, $iduser, $giadau, $ip);
 		echo "Đấu giá thành công";
 		
     }
@@ -139,7 +140,7 @@ class AjaxdaugiaController extends App_Controller_FrontController {
 		$this->_helper->layout->disableLayout();
 		$daugia = App_Models_DaugiaModel::getInstance();
 		
-		$data = $daugia->GetInfoUserByIdUser(5);
+		$data = $daugia->getRealIPAddress();
 		echo ($data);
 		//echo $this->_SESSION->iduser;
 	}

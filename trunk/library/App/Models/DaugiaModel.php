@@ -116,13 +116,11 @@ class App_Models_DaugiaModel {
 	}
 	
 	
-	
-	
-	
-	public function DauGia($idpd, $iduser, $giadau)
+	public function DauGia($idpd, $iduser, $giadau, $ip)
 	{
-		$sql = "Insert into ishali_bid_daugia values('NULL', $idpd, $iduser, $giadau, now())";
+		$sql = "Insert into ishali_bid_daugia values('NULL', $idpd, $iduser, $giadau, now(), '$ip')";
 		
+        echo $sql;
 		$this->_db->executeReader($sql);
 	}
 	
@@ -248,9 +246,25 @@ class App_Models_DaugiaModel {
 		// return $user;
 	// }
     
-    public function KiemTraKetThucPhienDau()
-    {
-        
+    function getRemoteIPAddress(){
+    $ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '';
+    return $ip;
+    }
+      
+    /* If your visitor comes from proxy server you have use another function
+    to get a real IP address: */
+    
+    function getRealIPAddress(){  
+        if(!empty($_SERVER['HTTP_CLIENT_IP'])){
+            //check ip from share internet
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        }else if(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+            //to check ip is pass from proxy
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        }else{
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+        return $ip;
     }
 
 }

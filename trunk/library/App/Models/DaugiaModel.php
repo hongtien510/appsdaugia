@@ -41,7 +41,25 @@ class App_Models_DaugiaModel {
         if (!empty($data)) {
   			return $data;
         }
-        return '12345';
+	}
+    
+    public function ShowAllPhienDauKetThuc()
+	{
+		$datenow = date("Y-m-d H:i:s");
+
+/* 		$sql = "Select pd.idpd, pd.idsp, pd.giaban, tensp, urlhinh, giakhoidiem, buocgia, tgbatdau, tgketthuc, giadau ";
+		$sql .= "from ishali_bid_phiendau pd, ishali_bid_sanpham sp, ishali_bid_daugia dg ";
+		$sql .= "where pd.idsp = sp.idsp and pd.idpd = dg.idpd and tgketthuc > '2013-01-07 15:16:24' ";
+		$sql .= "and dg.giadau >= (select MAX(giadau) as giadau from ishali_bid_daugia where dg.idpd = pd.idpd)"; */
+		
+		$sql  = "Select idpd, pd.idsp, pd.giaban, tensp, urlhinh, giakhoidiem, buocgia, tgbatdau, tgketthuc ";
+		$sql .= "from ishali_bid_phiendau pd, ishali_bid_sanpham sp ";
+		$sql .= "where pd.idsp = sp.idsp and tgketthuc < '" .$datenow ."'";
+		//echo $sql;
+		$data = $this->_db->executeReader($sql);
+        if (!empty($data)) {
+  			return $data;
+        }
 	}
 	
 	public function GiaDauCaoNhat($idPhienDau)
@@ -77,7 +95,7 @@ class App_Models_DaugiaModel {
 	public function ShowPhienDau($idPD)
 	{
 		$sql  = "Select pd.idpd, pd.idsp, giaban, giakhoidiem, buocgia, tgbatdau, tgketthuc, ";
-		$sql .= "tensp, urlhinh, gioithieu, thongso, hinhanh, video ";
+		$sql .= "tensp, urlhinh, gioithieu, thongso, hinhanh, video, titlechiase, motachiase ";
 		$sql .= "From ishali_bid_phiendau pd, ishali_bid_sanpham sp ";
 		$sql .= "Where pd.idsp = sp.idsp and idpd = " . $idPD;
 		
@@ -229,6 +247,11 @@ class App_Models_DaugiaModel {
 		// $user = $fb->getUser();	
 		// return $user;
 	// }
+    
+    public function KiemTraKetThucPhienDau()
+    {
+        
+    }
 
 }
 

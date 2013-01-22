@@ -1,4 +1,13 @@
 $(document).ready(function(){
+    
+    //var ml = screen.width/2 - 180;
+    var ml = 150;
+    //alert(ml);
+    $('#thongbao').css("margin-left",ml);
+    
+    
+    
+    
 
 	$('.mb_gioithieu').click(function(){
 		HideTab();
@@ -10,7 +19,7 @@ $(document).ready(function(){
 		HideTab();
 		RemoveActive();
 		$('ul.menutab li.mb_thongso').addClass('active');
-		$('#tabthongso').show();
+		$('#tabthongso').show();D
 	});
 	$('.mb_hinhanh').click(function(){
 		HideTab();
@@ -191,6 +200,7 @@ function DauGia(ops)
 
 function DanhSachDauGia(ops)
 {
+    
 	$.ajax({
 		url:taaa.appdomain + '/Ajaxdaugia/dsdaugia',
 		type:'post',
@@ -201,6 +211,7 @@ function DanhSachDauGia(ops)
 		$('#thongbao').html(data);
 		}
 	});	
+    
 }
 
 

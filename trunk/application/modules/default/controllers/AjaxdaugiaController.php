@@ -31,11 +31,11 @@ class AjaxdaugiaController extends App_Controller_FrontController {
 		$idpd = $_POST["idpd"];
 		$data = $daugia->DanhSachDauGia($idpd);
 		//$result="";
-		$str = "<p class='title_tb'>Danh sách người đấu giá</p><div class='content_tb'><table class='dsdaugia'><tr><th width='160'>Tên</th><th>Giá Đấu</th><th width='125'>Thời Gian Đấu</th></tr>";
+		$str = "<p class='title_tb_ds'>Danh sách người đấu giá</p><div class='content_tb_ds'><table class='dsdaugia'><tr><th width='160'>Tên</th><th>Giá Đấu</th><th width='145'>Thời Gian Đấu</th><th width='110'>Địa Chỉ IP</th></tr>";
 		for($i=0; $i<count($data); $i++)
 		{
 			$tgdau = $daugia->CatThoigian2($data[$i]["thoigiandau"]);
-			$str .= "<tr><td>". $data[$i]["hoten"] ."</td><td>". number_format($data[$i]["giadau"],0,',','.') ."đ</td><td>". $tgdau ."</td></tr>";
+			$str .= "<tr><td><a style='color: black' href='".$data[$i]["linkfb"]."' target='_blank' title='Link Facebook'>". $data[$i]["hoten"] ."</a></td><td>". number_format($data[$i]["giadau"],0,',','.') ."đ</td><td>". $tgdau ."</td><td>".$data[$i]["ip"]."</td></tr>";
 		}
 		echo $str."</table></div>";
 		

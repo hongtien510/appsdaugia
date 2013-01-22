@@ -37,7 +37,7 @@ body
 
 #container{width:800px; height:auto; border-left:1px solid #AFAFAF; border-right:1px solid #AFAFAF; margin:0px auto;}
 #banner{width:100%; height:100px; background:#dcdcdc;}
-#main{width:100%; height:35px; background:url("../images/bg_mn.png")repeat-x}
+#main{width:100%; height:35px; //background:url("../images/bg_mn.png")repeat-x; background: #2A842D;}
 ul.menu li{padding:9px 15px; float:left}
 ul.menu li a{color:white; font-size:15px; font-weight:bold; text-decoration:none;}
 ul.menu li a:hover{text-decoration:underline}
@@ -70,7 +70,7 @@ p.thoigianbid{float:left; width:185px; height:40px; text-align:left; line-height
 
 #daugia{width:100%; height:350px;}
 img.main_img{width:450px; height:300px; border:1px solid #999999; margin:20px 0px 20px 20px; float:left}
-#content_dg{width:300px; height:300px; float:left; padding:20px 0 20px 20px; line-height:30px;}
+#content_dg{width:300px; height:300px; float:left; padding:12px 0 20px 20px; line-height:30px;}
 
 .gtk{text-decoration:line-through}
 .timebid{height:10px}
@@ -107,7 +107,7 @@ p.chiase a img{position:relative; top:-2px}
 
 
 
-#footer{width:100%; height:100px; background:#5FBD2B; margin-top:20px}
+#footer{width:100%; height:135px; background:#5FBD2B; margin-top:20px}
 .left{float:left; margin-left:20px;}
 .right{float:right; margin-right:20px;}
 
@@ -123,9 +123,14 @@ display:none;
 	z-index:10;
 }
 #formlogin,
-#thongbao{display:none; width:400px; border:1px solid #67A769; margin-top:10%; margin-left:35%; position:fixed; z-index:20}
+#thongbao{display:none; //width:400px; border:1px solid #67A769; margin-top:10%; //margin-left:18%; position:fixed; z-index:20}
 p.title_tb{width:390px; height:23px; background:#67A769; padding-top:5px; font-size:15px; font-weight:bold; color:white; padding-left:10px; }
+p.title_tb_ds{width:500px; height:23px; background:#67A769; padding-top:5px; font-size:15px; font-weight:bold; color:white; padding-left:10px; }
+
 .content_tb{width:380px; background:white; padding:15px 10px 20px; font-size:13px; font-weight:bold;max-height:300px; overflow:auto}
+.content_tb_ds{width:490px; background:white; padding:15px 10px 20px; font-size:13px; font-weight:bold;max-height:300px; overflow:auto}
+
+
 .dongybid{margin-left:50px; margin-top:15px; width:100px; height:25px;}
 .huybid{margin-left:10px; margin-top:15px; width:120px; height:25px;}
 
@@ -158,13 +163,25 @@ img.lammoi{width:25px; height:25px; position:relative; top:2px; left:10px}
 
 .pdketthuc{color:red; font-weight:bold; font-size:15px}
 
-.dieuleDG{
+.baiviet{
     width: 780px;
     padding:10px;
+    font-size:12px
+}
+.showdg{display:inline-block; margin-bottom:20px}
+.tinthongbao{width:740px; padding:10px; border:1px solid #2A842D; margin:0px auto; font-size:12px; margin-top:2px}
+
+tr.tr1{
+     color: white; font-weight:bold; font-size:16px; background: #2A842D; height:30px; text-align:center  
+}
+tr.tr2 td{
+    font-size:12px;
+    color:#054C07;
+    padding:10px 0;
 }
 
-
-
+td.copy{color:white; font-size: 12px;}
+tr.tr3{background: #2A842D; height:25px}
 
 
 

@@ -126,7 +126,7 @@ class App_Models_DaugiaModel {
 	
 	public function DanhSachDauGia($idpd)
 	{
-		$sql = "Select dg.iduser, user.hoten, giadau, thoigiandau from ishali_bid_daugia dg, ishali_bid_user user where dg.iduser = user.iduser and idpd = ". $idpd ." order by thoigiandau desc";
+		$sql = "Select dg.iduser, user.hoten, giadau, thoigiandau, ip, linkfb from ishali_bid_daugia dg, ishali_bid_user user where dg.iduser = user.iduser and idpd = ". $idpd ." order by thoigiandau desc";
 		$data = $this->_db->executeReader($sql);
 		return $data;
 	}

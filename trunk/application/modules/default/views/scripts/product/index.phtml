@@ -1,3 +1,17 @@
+<script>
+    $(document).ready(function(){
+        
+        $('.test').click(function(){
+            content = $("#content");
+            contentTOP = content.position().top;
+            alert(contentTOP);
+            
+        });
+        
+        
+    });
+</script>
+
 <?php
 	$dg = App_Models_DaugiaModel::getInstance();
 	$ShowPhienDau = $this->ShowPhienDau;
@@ -13,6 +27,7 @@
     
     
 ?>
+
 <div id="daugia">
 		<img class="main_img" src="<?php echo APP_DOMAIN . '/application/layouts/' . $this->page->templates . '/images/upload/images/' . $ShowPhienDau[0]["urlhinh"] ?>" alt="nem" title="nem">
 		<div id="content_dg">
@@ -95,6 +110,7 @@
 			</p>
 		</div>
 	</div>
+    <a href="javascript:;" class="test">test</a>
 	<div id="detail">
 		<div id="menutab">
 			<ul class="menutab">
@@ -122,4 +138,4 @@
             <div class="fb-comments" data-href="<?php echo $LinkAppHost ?>" data-width="758" data-num-posts="2"></div>
         </div>
 	</div>
-	
+	<a href="javascript:;" class="test">test</a>

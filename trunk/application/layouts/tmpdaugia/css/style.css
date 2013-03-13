@@ -168,7 +168,7 @@ img.lammoi{width:25px; height:25px; position:relative; top:2px; left:10px}
     padding:10px;
     font-size:12px
 }
-.showdg{display:inline-block; margin-bottom:20px}
+.showdg{display:inline-block; margin-bottom:20px; width:100%}
 .tinthongbao{width:740px; padding:10px; border:1px solid #2A842D; margin:0px auto; font-size:12px; margin-top:2px}
 
 tr.tr1{

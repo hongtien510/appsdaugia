@@ -175,7 +175,15 @@ class AjaxdaugiaController extends App_Controller_FrontController {
         $idPD = @$_POST["idpd"];
         $idUser = @$_POST["iduser"];
         
-        $sql = "SELECT MAX( giadau ), iduser FROM ishali_bid_daugia WHERE idpd = ". $idPD;
+        //$sql = "SELECT MAX( giadau ), iduser FROM ishali_bid_daugia WHERE idpd = ". $idPD;
+		$sql  = "SELECT iduser ";
+		$sql .= "FROM ishali_bid_daugia ";
+		$sql .= "WHERE idpd = " .$idPD." ";
+		$sql .= "AND giadau = ( ";
+		$sql .= "SELECT MAX( giadau ) ";
+		$sql .= "FROM ishali_bid_daugia ";
+		$sql .= "WHERE idpd = ". $idPD ." )";
+		
         $data = $daugia->ThucThiTruyVan($sql);
         
         if ($data[0]["iduser"]==$idUser)

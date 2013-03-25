@@ -1,0 +1,240 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { 
+	margin:0;
+	padding:0;
+}
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+fieldset,img { 
+	border:0;
+}
+address,caption,cite,code,dfn,em,strong,th,var {
+	font-style:normal;
+	font-weight:normal;
+}
+ol,ul {
+	list-style:none;
+}
+caption,th {
+	text-align:left;
+}
+h1,h2,h3,h4,h5,h6 {
+	font-size:100%;
+	font-weight:normal;
+}
+q:before,q:after {
+	content:'';
+}
+abbr,acronym { border:0;
+}
+body
+{
+	line-height:1.5em;
+	font-size:62.5%;
+	font-family:Tahoma, Arial,times new roman;
+}
+
+#container{width:800px; height:auto; border-left:1px solid #AFAFAF; border-right:1px solid #AFAFAF; margin:0px auto;}
+#banner{width:100%; height:100px; background:#dcdcdc;}
+#main{width:100%; height:35px; //background:url("../images/bg_mn.png")repeat-x; background: #2A842D;}
+ul.menu li{padding:9px 15px; float:left}
+ul.menu li a{color:white; font-size:15px; font-weight:bold; text-decoration:none;}
+ul.menu li a:hover{text-decoration:underline}
+
+#content{width:100%; height:auto; display:inline-block;}
+ul.product_bid li{width:368px; height:250px; margin-top:20px; }
+ul.product_bid li img{width:366px; height:200px; border:1px solid #999999}
+h1.tensp{
+	background: none repeat scroll 0 0 #000000;
+    height: 25px;
+    margin-top: -37px;
+    opacity: 0.7;
+    padding-left: 5px;
+    padding-top: 7px;
+    width: 361px;
+	margin-left:1px;
+}
+h1.tensp a{color:white; text-decoration:none; font-size:15px; font-weight:bold;}
+h1.tensp a:hover{text-decoration:underline}
+div.giabid{margin-top:10px}
+p.giakhoidiem{float:left; width:85px; height:40px; text-align:center; line-height:18px; border-right:1px solid #999;}
+p.giahientai{float:left; width:85px; height:40px; text-align:center; line-height:18px; border-right:1px solid #999;}
+p.thoigianbid{float:left; width:185px; height:40px; text-align:left; line-height:18px; padding-left:10px }
+.textstyle1{color:black; font-size:12px; }
+.textstyle2{color:#006633; font-weight:bold; font-size:12px}
+
+
+
+
+
+#daugia{width:100%; height:350px;}
+img.main_img{width:450px; height:300px; border:1px solid #999999; margin:20px 0px 20px 20px; float:left}
+#content_dg{width:300px; height:300px; float:left; padding:12px 0 20px 20px; line-height:30px;}
+
+.gtk{text-decoration:line-through}
+.timebid{height:10px}
+.giabid{color:red; font-size:25px; //font-weight:bold}
+.nguoibid{color:#006633; font-weight:bold; font-size:15px}
+a.dsnguoibid{color: red; font-size:13px; text-decoration:none}
+a.dsnguoibid:hover{text-decoration:underline}
+input.price{width:110px;height:23px; text-align:center; font-size:16px;}
+
+#menutab{width:760px; margin-left:20px; height:30px; border-bottom:2px solid #5FBC2A}
+ul.menutab li{float:left; padding:6px 30px 4px; border:1px solid #999999; border-bottom:none;  border-radius:6px 6px 0px 0px; height:20px; margin-right:5px; cursor:pointer}
+ul.menutab li a{color:#006633; font-size:14px; font-weight:bold; text-decoration:none}
+.active{background:url("../images/bg_tab.png")}
+
+#listtab{width:758px; margin-left:20px; height:auto; border:1px solid #5FBC2A; margin-top:-1px}
+
+#tabthongso,
+#tabhinhanh,
+#tabvideo{
+	display:none;
+}
+#tabgioithieu,
+#tabthongso,
+#tabhinhanh,
+#tabvideo{
+	padding:15px;
+}
+
+p.chiase{width:300px; height:30px}
+p.chiase a{margin-right:5px;}
+p.chiase a img{position:relative; top:-2px}
+
+
+
+
+
+#footer{width:100%; height:135px; background:#5FBD2B; margin-top:20px}
+.left{float:left; margin-left:20px;}
+.right{float:right; margin-right:20px;}
+
+
+
+#bg_thongbao{
+display:none;
+	width:100%;
+	height:100%;
+	background:#000000;
+	opacity:0.5;
+	position:fixed;
+	z-index:10;
+}
+#formlogin,
+#thongbao{display:none; //width:400px; border:1px solid #67A769; margin-top:10%; //margin-left:18%; position:fixed; z-index:20}
+p.title_tb{width:390px; height:23px; background:#67A769; padding-top:5px; font-size:15px; font-weight:bold; color:white; padding-left:10px; }
+p.title_tb_ds{width:500px; height:23px; background:#67A769; padding-top:5px; font-size:15px; font-weight:bold; color:white; padding-left:10px; }
+
+.content_tb{width:380px; background:white; padding:15px 10px 20px; font-size:13px; font-weight:bold;max-height:300px; overflow:auto}
+.content_tb_ds{width:490px; background:white; padding:15px 10px 20px; font-size:13px; font-weight:bold;max-height:300px; overflow:auto}
+
+
+.dongybid{margin-left:50px; margin-top:15px; width:100px; height:25px;}
+.huybid{margin-left:10px; margin-top:15px; width:120px; height:25px;}
+
+.btn_daugia{width:70px; height:26px;}
+
+#thongbao table.dsdaugia{width:100%; font-weight:normal; }
+#thongbao table.dsdaugia th{font-weight:bold; font-size:14px; color:#67A769}
+#thongbao table.dsdaugia tr{border-bottom:1px solid #67A769}
+#thongbao table.dsdaugia td{padding:7px 0}
+
+#thongbao table.login td{padding:5px 0}
+#thongbao table.login td a.btnregister,
+#thongbao table.login td a.btnlogin{color:#67A769; font-weight: normal; text-decoration: none;}
+#thongbao table.login td a.btnregister:hover,
+#thongbao table.login td a.btnlogin:hover{text-decoration:underline}
+.inputstyle{width:200px; height:20px}
+.inputstyle2{width:100px; height:27px}
+span.thongbaologin{color:#67A769}
+span.loidangnhap{color:red; font-weight:normal}
+span.loidangky{color:red; font-weight:normal}
+
+li.username{float:right !important; position:relative;}
+li.username ul li{background:#67A769; width:138px; padding:5px 0; text-align:center; position:absolute; margin-top:8px; right:0px}
+li.username ul{display:none}
+li.username:hover ul{display:block}
+
+
+.commentFB{margin-left:20px; margin-top:20px}
+img.lammoi{width:25px; height:25px; position:relative; top:2px; left:10px}
+
+.pdketthuc{color:red; font-weight:bold; font-size:15px}
+
+.baiviet{
+    width: 780px;
+    padding:10px;
+    font-size:12px
+}
+.showdg{display:inline-block; margin-bottom:20px; width:100%}
+.tinthongbao{width:740px; padding:10px; border:1px solid #2A842D; margin:0px auto; font-size:12px; margin-top:2px}
+
+tr.tr1{
+     color: white; font-weight:bold; font-size:16px; background: #2A842D; height:30px; text-align:center  
+}
+tr.tr2 td{
+    font-size:12px;
+    color:#054C07;
+    padding:10px 0;
+}
+
+td.copy{color:white; font-size: 12px;}
+tr.tr3{background: #2A842D; height:25px}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

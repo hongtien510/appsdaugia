@@ -1,0 +1,36 @@
+
+<div class="form_view">
+    <form method="post" action="<?php echo APP_DOMAIN; ?>/registry/registry">
+        <p>
+            <span>Họ : </span>
+            <input type="text" name="first_name"/> 
+        </p>
+        <p>
+            <span>Tên đệm : </span>
+            <input type="text" name="middle_name"/> 
+        </p>
+        <p>
+            <span>Tên : </span>
+            <input type="text" name="last_name"/> 
+        </p>
+        <p>
+            <span>Email : </span>
+            <input type="text" name="email"/> 
+        </p>
+        <p>
+            <span>Ngày sinh : </span>
+            <input type="text" name="birthday"/> 
+        </p>
+        <p>
+            <span>Giới tính : </span>
+            <select name="gender">
+                <option value="0">Nữ</option>
+                <option value="1">Nam</option>
+            </select>
+        </p>
+
+        <p>
+            <input type="submit" value="Đăng ký"/>
+        </p>
+    </form>
+</div>

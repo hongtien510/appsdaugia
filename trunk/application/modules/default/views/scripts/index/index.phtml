@@ -1,0 +1,118 @@
+
+<?php 
+		$facebook = new Ishali_Facebook();
+		$fb = $facebook->getFB();			
+		/*
+		if(isset($_GET['request_ids'])){                             
+		 $reqId = $_GET['request_ids'];
+		 $requests = $fb->api('/me/apprequests/?request_ids='.$reqId);    
+
+		 $itemData = $requests['data'][0]['data'];
+		 
+		 if(isset($itemData) && $itemData !=""){
+			echo "<script language='javascript'>top.location.href='" . $itemData . "'</script>";
+			exit(0);
+		 }else
+			 if(isset($requests['data'][1]['data']) && $requests['data'][1]['data'] !=""){
+				echo "<script language='javascript'>top.location.href='" . $requests['data'][1]['data'] . "'</script>";
+				exit(0);
+			 }else
+			 if(isset($requests['data'][2]['data']) && $requests['data'][2]['data'] !=""){
+				echo "<script language='javascript'>top.location.href='" . $requests['data'][2]['data'] . "'</script>";
+				exit(0);
+			 }
+		}
+		*/
+		$signed_request = $fb->getSignedRequest();
+		//echo "<pre>";
+		// print_r($signed_request);
+	//	echo "</pre>";
+		 if($signed_request  && $signed_request['page']['liked'])
+         {
+			$_SESSION['haslike'] =  $signed_request['page']['liked'];
+		//	$_SESSION['pageid'] =  $signed_request['page']['id'];
+	       		 
+         }
+		 
+		 if($signed_request && $signed_request['page']['id'])
+         {
+			$_SESSION['pageid'] =  $signed_request['page']['id'];	       		 
+         }
+/*
+		 echo "<pre>";		 
+print_r($requests);
+echo "</pre>";
+*/
+?>
+<div class="search">
+    <form method="get" action="<?php echo APP_DOMAIN . '/index/search' ?>">
+        <ul>
+            <li>
+                <input type="text" name="textSearch" value="<?php echo $this->textSearch; ?>" >
+            </li>
+            <li>
+                <select name="filter">                    
+                    <option value="1">Tên</option>
+                    <option value="2">Mã thí sinh</option>
+                </select>
+            </li>
+            <li>
+                <input type="submit" value="Tìm kiếm" >
+            </li>
+        </ul>
+    </form>
+
+</div>
+<div class="clear"></div>
+<div id='paging' style="display: none;margin: 5px;">
+    <?php
+    echo $this->paging;
+    ?>
+</div>
+<div>
+    <?php if (count($this->listInfo) > 0) { ?>
+
+        <ul class="list-info">        
+            <?php foreach ($this->listInfo as $info) { ?>
+                <li>
+                    <div>
+                        <a href="<?php echo APP_DOMAIN; ?>/index/detail?id=<?php echo $info->id_thi_sinh ?>">
+                            <?php
+                            $images = json_decode($info->hinh_du_thi);
+							if( $images[0])
+							{
+								$imageLink = APP_DOMAIN . '/public/images/' . $images[0];
+							}else
+							{
+								$imageLink = APP_DOMAIN . '/public/images/khongcohinh.jpg';
+							}
+                            ?>
+                            <img class="thumb" src="<?php echo $imageLink; ?>" />
+                        </a>
+                    </div>                 
+                    <?php if ($this->page->show_gioi_thieu) { ?>
+                        <p><?php echo $info->gioi_thieu; ?></p>    
+                    <?php } ?>  
+                    <?php if ($this->page->show_luot_xem) { ?>
+                        <p>Lượt xem : <?php echo $info->luot_xem; ?></p>    
+                    <?php } ?>
+                    <?php if ($this->page->show_so_binh_chon) { ?>
+                        <p>Bình chọn : <?php echo $info->luot_binh_chon; ?></p>    
+                    <?php } ?>
+                    <?php if ($this->page->show_ten) { ?>
+                        <p><?php echo $info->ten_thi_sinh; ?></p>    
+                    <?php } ?>
+                    <?php if ($this->page->show_ma) { ?>
+                        <p>Mã : <?php echo $info->id_fb_thi_sinh; ?></p>    
+                    <?php } ?>
+                </li>
+            <?php } ?>
+        </ul>
+    <?php } else { ?>
+        <p>Không có thí sinh nào</p>
+    <?php } ?>
+</div>
+
+<script>
+    common.renderPagingSearch('paging', 'trang trước', 'trang sau', 'Trang đầu', 'Trang cuối', '<?php echo $this->keyword; ?>');
+</script>

@@ -1,0 +1,32 @@
+<?php
+    $DieuLe = $this->dieule;
+?>
+
+<form action = "dieule/chinhsuadieule" method = "post" enctype="multipart/form-data">
+
+    <textarea id="ckdieule" class="textareastyle" type="text" name="dieule"><?php echo $DieuLe; ?></textarea>
+	
+    <input type="submit" name="btnsubmit" value="Chỉnh Sửa"/>
+
+</form>
+
+<script>
+	
+	var editor1 = CKEDITOR.replace( 'ckdieule' );
+	CKFinder.setupCKEditor( editor1, '../public/ckfinder/' ) ;
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

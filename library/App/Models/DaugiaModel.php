@@ -35,7 +35,7 @@ class App_Models_DaugiaModel {
 		
 		$sql  = "Select idpd, pd.idsp, pd.giaban, tensp, urlhinh, giakhoidiem, buocgia, tgbatdau, tgketthuc ";
 		$sql .= "from ishali_bid_phiendau pd, ishali_bid_sanpham sp ";
-		$sql .= "where pd.idsp = sp.idsp and tgketthuc > '" .$datenow ."'";
+		$sql .= "where pd.idsp = sp.idsp and tgbatdau <= '" .$datenow ."' and tgketthuc > '" .$datenow ."'";
 		//echo $sql;
 		$data = $this->_db->executeReader($sql);
         if (!empty($data)) {
@@ -55,6 +55,25 @@ class App_Models_DaugiaModel {
 		$sql  = "Select idpd, pd.idsp, pd.giaban, tensp, urlhinh, giakhoidiem, buocgia, tgbatdau, tgketthuc ";
 		$sql .= "from ishali_bid_phiendau pd, ishali_bid_sanpham sp ";
 		$sql .= "where pd.idsp = sp.idsp and tgketthuc < '" .$datenow ."'";
+		//echo $sql;
+		$data = $this->_db->executeReader($sql);
+        if (!empty($data)) {
+  			return $data;
+        }
+	}
+	
+	public function ShowAllPhienDauSapDienRa()
+	{
+		$datenow = date("Y-m-d H:i:s");
+
+/* 		$sql = "Select pd.idpd, pd.idsp, pd.giaban, tensp, urlhinh, giakhoidiem, buocgia, tgbatdau, tgketthuc, giadau ";
+		$sql .= "from ishali_bid_phiendau pd, ishali_bid_sanpham sp, ishali_bid_daugia dg ";
+		$sql .= "where pd.idsp = sp.idsp and pd.idpd = dg.idpd and tgketthuc > '2013-01-07 15:16:24' ";
+		$sql .= "and dg.giadau >= (select MAX(giadau) as giadau from ishali_bid_daugia where dg.idpd = pd.idpd)"; */
+		
+		$sql  = "Select idpd, pd.idsp, pd.giaban, tensp, urlhinh, giakhoidiem, buocgia, tgbatdau, tgketthuc ";
+		$sql .= "from ishali_bid_phiendau pd, ishali_bid_sanpham sp ";
+		$sql .= "where pd.idsp = sp.idsp and tgbatdau > '" .$datenow ."'";
 		//echo $sql;
 		$data = $this->_db->executeReader($sql);
         if (!empty($data)) {

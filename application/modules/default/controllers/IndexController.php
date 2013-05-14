@@ -7,7 +7,7 @@ class IndexController extends App_Controller_FrontController {
     }
 
     public function indexAction() {
-
+	
         /*         * *test lấy facebook */
 
 //    	$facebook = new Ishali_Facebook();  

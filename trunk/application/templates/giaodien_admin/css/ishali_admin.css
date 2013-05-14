@@ -189,7 +189,7 @@ h1
     width: 745px;
 }
 
-.list_menu ul li
+.list_menu ul li.menu
 {
 	border-radius: 5px 5px 0 0;
     display: inline-block;
@@ -201,13 +201,13 @@ h1
  	font-weight: bold;
 }
 
-.list_menu ul li a
+.list_menu ul li.menu a
 {
 	text-decoration: none;	
 	color: #006633;
 }
-.list_menu ul li a:hover{text-decoration: underline;}
-.list_menu ul li.active, .list_menu ul li:hover
+.list_menu ul li.menu a:hover{text-decoration: underline;}
+.list_menu ul li.active, .list_menu ul li.menu:hover
 {
 	background: none repeat scroll 0 0 #FFFFFF;
 	color: #3B5998;
@@ -273,3 +273,52 @@ td{ border-bottom:1px solid #DBDFE3; padding:5px 0}
 {
 	color: #3B5998;
 }
+
+
+il.menu{position:relative}
+ul.ul_child{
+	position:absolute;
+	width:200px;
+	display:none;
+	margin-top:0px;
+	margin-left:-7px;
+}
+ul.ul_child li{float:left;
+	background:#67A769;
+	list-style:none;
+	width:100%;
+	padding-left:10px;
+}
+ul.ul_child li a{
+	color:white !important;
+}
+.list_menu ul li:hover ul.ul_child{display:block}
+
+.ten_loai_pd{
+	color:#006633;
+	font-size:13px;
+	font-weight:bold;
+	margin-top:10px;
+	margin-left:15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

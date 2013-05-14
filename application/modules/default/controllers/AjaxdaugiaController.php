@@ -88,29 +88,53 @@ class AjaxdaugiaController extends App_Controller_FrontController {
 		}
 		
 	}
-	public function kiemtrathongtindangkyAction() {
+	
+	public function kiemtraidfacebookdadangkyAction(){
 		$this->_helper->viewRenderer->setNoRender(true);
 		$this->_helper->layout->disableLayout();
 		$daugia = App_Models_DaugiaModel::getInstance();
 		
 		$IdUserFB = $_POST["IdUserFB"];
-		$username = $_POST["username"];
 		//$IdUserFB = '100002151254254';
 		//$username = 'hongtien510';
 		
 		$data1 = $daugia->KiemTraIdFB($IdUserFB);
-		$data2 = $daugia->KiemTraUsername($username);
+		
 		if(isset($data1[0][1]))
-			$kq1 = 1;
+			$kq1 = $IdUserFB;
 		else
-			$kq1 = 0;
+			$kq1 = 1;
+		
+		
+		$kq=array('IdUserFB'=>$kq1,);
+			echo Zend_Json::encode($kq);
+	
+	}
+	
+	
+	public function kiemtrathongtindangkyAction() {
+		$this->_helper->viewRenderer->setNoRender(true);
+		$this->_helper->layout->disableLayout();
+		$daugia = App_Models_DaugiaModel::getInstance();
+		
+		//$IdUserFB = $_POST["IdUserFB"];
+		$username = $_POST["username"];
+		//$IdUserFB = '100002151254254';
+		//$username = 'hongtien510';
+		
+		//$data1 = $daugia->KiemTraIdFB($IdUserFB);
+		$data2 = $daugia->KiemTraUsername($username);
+		// if(isset($data1[0][1]))
+			// $kq1 = 1;
+		// else
+			// $kq1 = 0;
 		
 		if(isset($data2[0][1]))
-			$kq2 = 1;
-		else
 			$kq2 = 0;
+		else
+			$kq2 = 1;
 		//echo $kq1.'    '.$kq2;
-		$kq=array('IdUserFB'=>$kq1, 'username'=>$kq2);
+		$kq=array('username'=>$kq2);
 			echo Zend_Json::encode($kq);
 	}
 	public function dangkyAction() {
@@ -183,12 +207,16 @@ class AjaxdaugiaController extends App_Controller_FrontController {
 		$sql .= "SELECT MAX( giadau ) ";
 		$sql .= "FROM ishali_bid_daugia ";
 		$sql .= "WHERE idpd = ". $idPD ." )";
+		//echo $sql;
 		
         $data = $daugia->ThucThiTruyVan($sql);
-        
-        if ($data[0]["iduser"]==$idUser)
+		if(count($data) > 0)
+		{
+			if ($data[0]["iduser"]==$idUser)
             echo "0";
+		}
         else
             echo "1";
+			
     }
 }

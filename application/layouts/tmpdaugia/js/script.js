@@ -1,9 +1,9 @@
 $(document).ready(function(){
     
     //var ml = screen.width/2 - 180;
-    var ml = 150;
+    //var ml = 150;
     //alert(ml);
-    $('#thongbao').css("margin-left",ml);
+    //$('#thongbao').css("margin-left",ml);
     
     
     
@@ -51,12 +51,13 @@ $(document).ready(function(){
 	
 	
 	
-	
+	/*
 
 	$('.btnregister').live('click',function(){
-		HienThiFormDangKy();
+		KiemTraIDFBDangKy(100002151254254);
+		//HienThiFormDangKy();
 	});
-	
+	*/
 	$('.menudangnhap').live('click',function(){
 		HienFormDangNhap();
 	});
@@ -81,10 +82,7 @@ $(document).ready(function(){
 		$('#thongbao').hide();
 	});
     
-    $('.btn_daugiaa').click(function(){
-		//ThongBaoDauGia();
-			KiemTraDangNhap();
-	});
+
 });
 
 function ClickDauGia(ops)
@@ -155,14 +153,17 @@ function KiemTraLanDauGia(idPD, idUser)
 		type:'post',
 		data:{idpd:idPD, iduser:idUser},
 		success:function(data){
-		  if(data==1)
-          {
+		
+			if(data==1)
+			{
                 ThongBaoDauGia();
-          }
-          else
-          {
+				return false;
+			}
+			else
+			{
                 ThongBao("Bạn đang nắm giữ giá đấu cao nhất",2000);
-          }
+				return false;
+			}
 		}
 	});	  
 }
@@ -224,15 +225,26 @@ function ThongBao(nd,time)
 	myVar = setTimeout(function(){$('#thongbao').hide(); $('#bg_thongbao').hide();return false},time);
 }
 
+function ThongBaoLoi1(nd)
+{
+	$('#bg_thongbao').show();
+	$('#thongbao').show();
+	$('#thongbao').html("<p class='title_tb'>Thông báo</p><div class='content_tb'>"+nd+"</div><p class='bt_dongy_tb' onclick=\"Ok_ThongBaoLoi1()\">Đồng ý</p>");
+}
 
-
+function Ok_ThongBaoLoi1()
+{
+	$('#thongbao').hide(); 
+	$('#bg_thongbao').hide();
+	return false;
+}
 
 
 function HienFormDangNhap()
 {
 	$('#bg_thongbao').show();
 	$('#thongbao').show();
-	$('#thongbao').html("<p class='title_tb'>Đăng Nhập</p><div class='content_tb'><table class='login'><tr><td colspan='2'><span class='thongbaologin'>Bạn cần đăng nhập trước khi đấu giá</span></td></tr><tr><td width='115'>Tên Đăng Nhập</td><td><input class='inputstyle' type='text' id='username' name='username'/></td></tr><tr><td>Mật Khẩu</td><td><input class='inputstyle' type='password' id='password' name='password'/></td></tr><tr><td><a href='javascript:;' class='btnregister'>Đăng Ký</a></td><td><input class='inputstyle2' type='button' name='btnlogin' value='Đăng Nhập' onclick=\"DangNhap({username:document.getElementById('username').value, password:document.getElementById('password').value, IdUserFB:document.getElementById('IdUserFB').value})\"/></td></tr><tr><td colspan='2'><span class='loidangnhap'></span></td></tr></table></div>");
+	$('#thongbao').html("<p class='title_tb'>Đăng Nhập</p><div class='content_tb'><table class='login'><tr><td colspan='2'><span class='thongbaologin'>Bạn cần đăng nhập trước khi đấu giá</span></td></tr><tr><td width='115'>Tên Đăng Nhập</td><td><input class='inputstyle' type='text' id='username' name='username'/></td></tr><tr><td>Mật Khẩu</td><td><input class='inputstyle' type='password' id='password' name='password'/></td></tr><tr><td><a href='javascript:;' onclick=\"KiemTraIDFBDangKy(document.getElementById('IdUserFB').value)\" class='btnregister'>Đăng Ký</a></td><td><input class='inputstyle2' type='button' name='btnlogin' value='Đăng Nhập' onclick=\"DangNhap({username:document.getElementById('username').value, password:document.getElementById('password').value, IdUserFB:document.getElementById('IdUserFB').value})\"/></td></tr><tr><td colspan='2'><span class='loidangnhap'></span></td></tr></table></div>");
 }
 
 function DangNhap(ops)
@@ -281,6 +293,30 @@ function checkphone(phone)
 		return returnval;
 }
 
+function KiemTraIDFBDangKy(IdUserFB)
+{
+	$.ajax({
+		url:taaa.appdomain + '/Ajaxdaugia/kiemtraidfacebookdadangky',
+		type:'post',
+		data:{IdUserFB:IdUserFB},
+		success:function(data){
+
+			var obj = jQuery.parseJSON(data);
+			if(obj.IdUserFB == 1)
+			{
+				HienThiFormDangKy();
+			}
+			else
+			{
+				//alert('Khong DK duoc roi');
+				ThongBaoLoi1("IDFB : " + obj.IdUserFB + "<br/>Tài khoản FB này đã tạo tài khoản trên ứng dụng.<br/>Bạn cần phải đăng nhập để đấu giá. ");
+			}
+		}
+	});		
+
+
+}
+
 function KiemTraDangKy(ops)
 {
 
@@ -305,13 +341,8 @@ function KiemTraDangKy(ops)
 		data:{IdUserFB:IdUserFB, username:username},
 		success:function(data){
 			var obj = jQuery.parseJSON(data);
-			
-			if(obj.IdUserFB==1)
-			{
-				$('span.loidangky').html("Tài khoản Facebook của bạn đã được đăng ký");
-				return false;
-			}
-			if(obj.username==1)
+
+			if(obj.username==0)
 			{
 				$('span.loidangky').html("Tên đăng nhập đã được đăng ký");
 				return false;

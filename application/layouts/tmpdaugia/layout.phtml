@@ -19,9 +19,19 @@
 			var taaa = {};
 			taaa.appdomain = "<?php echo APP_DOMAIN ?>";
 			taaa.fbappdomain = "<?php echo FB_APP_DOMAIN ?>";
-			
 		</script>
-	
+		<script>
+			$(function(){
+			  center()//gọi hàm mới load web
+				$(window).resize(function(){center()})//gọi hàm khi resize
+				//alert($(window).width());
+				//alert($('#thongbao').width());
+			  function center(){//hàm xử lý
+				$('#thongbao').css({left:($(window).width()-$('#thongbao').width())/2,top:(($(window).height()-$('#thongbao').height())/2)-100});
+				$('#formlogin').css({left:($(window).width()-$('#formlogin').width())/2,top:(($(window).height()-$('#formlogin').height())/2)-100});
+			  }
+			})
+	  </script>
 	</head>
 
     <body>

@@ -4,7 +4,10 @@
 	$ShowPhienDau = $this->ShowPhienDau;
 	$NguoiDauCaoNhat = $this->NguoiDauCaoNhat;
 	$iduser = $dg->GetIdUserByIdUserFB();
-	
+	if(count($iduser)==0){
+		$iduser[0]["iduser"]=0;
+	}
+	print_r($iduser);
     $LinkAppHost = 'http://' . $_SERVER['SERVER_NAME'].Zend_Controller_Front::getInstance()->getRequest()->getRequestUri();
 
 
@@ -125,4 +128,3 @@
             <div class="fb-comments" data-href="<?php echo $LinkAppHost ?>" data-width="758" data-num-posts="2"></div>
         </div>
 	</div>
-	<a href="javascript:;" class="test">test</a>

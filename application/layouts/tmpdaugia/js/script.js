@@ -88,15 +88,16 @@ $(document).ready(function(){
 function ClickDauGia(ops)
 {
     idPD = ops.idpd;
-    idUser = ops.iduser;
-    //alert(idPD);
-    //alert(idUser);
-    
-    KiemTraDangNhap(idPD, idUser);
+	//IdUserFB = ops.IdUserFB;
+	
+     //alert (idPD);
+	//alert (IdUserFB);
+	
+    KiemTraDangNhap(idPD);
 }
 
 
-function KiemTraDangNhap(idPD, idUser)
+function KiemTraDangNhap(idPD)
 {
 		$.ajax({
 		url:taaa.appdomain + '/Ajaxdaugia/kiemtradangnhap',
@@ -112,13 +113,13 @@ function KiemTraDangNhap(idPD, idUser)
 			else
 			{
 			     //alert('qqqqqqqqqqqqqq');
-                KiemTraTGKetThucPD(idPD, idUser);           
+                KiemTraTGKetThucPD(idPD);           
 			}
 		}
 	});		
 }
 
-function KiemTraTGKetThucPD(idPD, idUser)
+function KiemTraTGKetThucPD(idPD)
 {
 
     $.ajax({
@@ -130,7 +131,7 @@ function KiemTraTGKetThucPD(idPD, idUser)
 			var obj = jQuery.parseJSON(data);
             if (obj.result==1)
             {
-                KiemTraLanDauGia(idPD, idUser);
+                KiemTraLanDauGia(idPD);
                 //
             }
             else
@@ -143,7 +144,7 @@ function KiemTraTGKetThucPD(idPD, idUser)
     return false;	
 }
 
-function KiemTraLanDauGia(idPD, idUser)
+function KiemTraLanDauGia(idPD)
 {
     //alert(idPD);
     //alert(idUser);
@@ -151,9 +152,9 @@ function KiemTraLanDauGia(idPD, idUser)
     $.ajax({
 		url:taaa.appdomain + '/Ajaxdaugia/kiemtralandaugia',
 		type:'post',
-		data:{idpd:idPD, iduser:idUser},
+		data:{idpd:idPD},
 		success:function(data){
-		
+
 			if(data==1)
 			{
                 ThongBaoDauGia();
@@ -164,6 +165,7 @@ function KiemTraLanDauGia(idPD, idUser)
                 ThongBao("Bạn đang nắm giữ giá đấu cao nhất",2000);
 				return false;
 			}
+
 		}
 	});	  
 }
@@ -172,7 +174,7 @@ function ThongBaoDauGia()
 {
 	$('#bg_thongbao').show();
 	$('#thongbao').show();
-	$('#thongbao').html("<p class='title_tb'>Thông báo</p><div class='content_tb'>Bạn có thực sự muốn đấu giá này</br><input type='button' class='dongybid' id='dongybid' value='Đồng Ý' onclick=\"DauGia({idpd:document.getElementById('hd_idpd').value, iduser:document.getElementById('hd_iduser').value, giadau:document.getElementById('hd_idgd').value})\"/><input type='button' class='huybid' id='huybid' value='Không Đồng Ý' onclick=\"HuyDauGia()\"/></div>");
+	$('#thongbao').html("<p class='title_tb'>Thông báo</p><div class='content_tb'>Bạn có thực sự muốn đấu giá này</br><input type='button' class='dongybid' id='dongybid' value='Đồng Ý' onclick=\"DauGia({idpd:document.getElementById('hd_idpd').value, giadau:document.getElementById('hd_idgd').value})\"/><input type='button' class='huybid' id='huybid' value='Không Đồng Ý' onclick=\"HuyDauGia()\"/></div>");
 }
 
 function HuyDauGia()
@@ -183,14 +185,13 @@ function HuyDauGia()
 
 function DauGia(ops)
 {
-// alert(ops.idpd);
-// alert(ops.iduser);
-// alert(ops.giadau);
-// return false;
+ //alert(ops.idpd);
+ //alert(ops.giadau);
+ //return false;
 	$.ajax({
 		url:taaa.appdomain + '/Ajaxdaugia',
 		type:'post',
-		data:{idpd:ops.idpd, iduser:ops.iduser, giadau:ops.giadau},
+		data:{idpd:ops.idpd, giadau:ops.giadau},
 		success:function(data){
 		  //alert(data);
 			ThongBao("Bạn đã đấu giá thành công",1500);

@@ -3,11 +3,7 @@
 	$dg = App_Models_DaugiaModel::getInstance();
 	$ShowPhienDau = $this->ShowPhienDau;
 	$NguoiDauCaoNhat = $this->NguoiDauCaoNhat;
-	$iduser = $dg->GetIdUserByIdUserFB();
-	if(count($iduser)==0){
-		$iduser[0]["iduser"]=0;
-	}
-	print_r($iduser);
+
     $LinkAppHost = 'http://' . $_SERVER['SERVER_NAME'].Zend_Controller_Front::getInstance()->getRequest()->getRequestUri();
 
 
@@ -75,12 +71,9 @@
             ?>
             <span class="textstyle1">Giá đấu tiếp theo: </span>
 			<input class="price"  readonly="true" type="text" id="pricebid" name="pricebid" value="<?php echo number_format($giadau,0,',','.');?>đ"/>
-			<!--<input type="button" name="daugia" value="Đấu giá" onclick = "return confirm('Bạn có chắc chắn muốn đấu giá'); DauGia({idpd:'<?php echo $ShowPhienDau[0]["idpd"]?>', iduser:'<?php echo $UserFB["id"]; ?>', giadau:'<?php echo $giadau;?>'})"/></br>-->
-			<input type="button" class="btn_daugia" onclick="ClickDauGia({idpd:'<?php echo $ShowPhienDau[0]["idpd"]?>', iduser:'<?php echo $iduser[0]["iduser"]; ?>'})" name="daugia" value="Đấu giá" /><br/>
-			
+
+			<input type="button" class="btn_daugia" onclick="ClickDauGia({idpd:'<?php echo $ShowPhienDau[0]["idpd"]?>'})" name="daugia" value="Đấu giá" /><br/>
 			<input type="hidden" id="hd_idpd" value="<?php echo $ShowPhienDau[0]["idpd"]?>"/>
-			<!--<input type="hidden" id="hd_iduser" value="<?php echo $UserFB["id"]; ?>"/>-->
-			<input type="hidden" id="hd_iduser" value="<?php echo $iduser[0]["iduser"]; ?>"/>
 			<input type="hidden" id="hd_idgd" value="<?php echo $giadau; ?>"/>
 			<?php
                 }

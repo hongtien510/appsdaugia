@@ -12,8 +12,10 @@ class AjaxdaugiaController extends App_Controller_FrontController {
 		$this->_helper->layout->disableLayout();
 		$daugia = App_Models_DaugiaModel::getInstance();
 		
+		$data = $daugia->GetIdUserByIdUserFB();
+		
+		$iduser = $data[0]['iduser'];
 		$idpd = $_POST["idpd"];
-		$iduser = $_POST["iduser"];
 		$giadau = $_POST["giadau"];
 		//$ip = $daugia->getRemoteIPAddress();
         $ip = "192.168.1.1";
@@ -22,6 +24,8 @@ class AjaxdaugiaController extends App_Controller_FrontController {
 		echo "Đấu giá thành công";
 		
     }
+	
+
 
 	public function dsdaugiaAction() {
 		$this->_helper->viewRenderer->setNoRender(true);
@@ -197,9 +201,10 @@ class AjaxdaugiaController extends App_Controller_FrontController {
 		$daugia = App_Models_DaugiaModel::getInstance();
         
         $idPD = @$_POST["idpd"];
-        $idUser = @$_POST["iduser"];
-        
-        //$sql = "SELECT MAX( giadau ), iduser FROM ishali_bid_daugia WHERE idpd = ". $idPD;
+		$data = $daugia->GetIdUserByIdUserFB();
+		$idUser = $data[0]['iduser'];
+
+ 
 		$sql  = "SELECT iduser ";
 		$sql .= "FROM ishali_bid_daugia ";
 		$sql .= "WHERE idpd = " .$idPD." ";
@@ -217,6 +222,6 @@ class AjaxdaugiaController extends App_Controller_FrontController {
 		}
         else
             echo "1";
-			
+		
     }
 }

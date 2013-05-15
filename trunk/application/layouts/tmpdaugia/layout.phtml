@@ -39,7 +39,12 @@
 	<input type="hidden" id="NameUserFB" value="<?php echo $UserFB["name"];?>"/>
 	<input type="hidden" id="LinkFB" value="<?php echo $UserFB["link"];?>"/>
 	<div id="bg_thongbao"></div>
-	<div id="thongbao"></div>
+	<div id="thongbao">
+		<!--
+		<p class='title_tb'>Đổi Mật Khẩu</p><div class='content_tb'><table class='login'><tr><td width='145'>Mật khẩu cũ</td><td><input class='inputstyle' type='text' id='oldpass' name='oldpass' /></td></tr><tr><td>Mật khẩu mới</td><td><input class='inputstyle' type='text' id='newpass' name='newpass'/></td></tr><tr><td>Nhập lại mật khẩu mới</td><td><input class='inputstyle' type='text' id='newrepass' name='newrepass'/></td></tr><tr><td></td><td><input class='inputstyle2' type='button' name='btnlogin' value='Đổi mật khẩu' onclick = "ThayDoiMK(document.getElementById('oldpass').value, document.getElementById('newpass').value, document.getElementById('newrepass').value)" /></td></tr><tr><td colspan='2'><span class='loidoimk'></span></td></tr></table></div>
+	-->
+	
+	</div>
 	<div id="formlogin"></div>
 	
 	<div id="container">
@@ -60,7 +65,7 @@
 		<li class="username">
 		<?php 
 			if($SessionIdUser != 0)
-				echo "<a href='javascript:;'>$hoten</a><ul><li><a class='menudangxuat' href='javascript:;'>Đăng Xuất</a></li></ul>";
+				echo "<a href='javascript:;'>$hoten</a><ul><li><a class='menuquenmk' href='javascript:;'>Đổi Mật Khẩu</a></li><li><a class='menudangxuat' href='javascript:;'>Đăng Xuất</a></li></ul>";
 			else
 				echo "<a class='menudangnhap' href='javascript:;'>Đăng Nhập</a>";
 		?>	

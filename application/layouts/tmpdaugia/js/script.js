@@ -45,22 +45,11 @@ $(document).ready(function(){
 		$('#tabvideo').hide();
 	}
 	
-	// $('.dsnguoibid').click(function(){
-		// ThongBao("Bạn đã đấu giá thành công");
-	// });
-	
-	
-	
-	/*
 
-	$('.btnregister').live('click',function(){
-		KiemTraIDFBDangKy(100002151254254);
-		//HienThiFormDangKy();
-	});
-	*/
 	$('.menudangnhap').live('click',function(){
 		HienFormDangNhap();
 	});
+	
 	$('.menudangxuat').live('click',function(){
 		$.ajax({
 			url:taaa.appdomain + '/Ajaxdaugia/dangxuat',
@@ -71,6 +60,10 @@ $(document).ready(function(){
 				$('li.username').html("<a class='menudangnhap' href='javascript:;'>Đăng Nhập</a>");
 			}
 		});	
+	});
+	
+	$('.menuquenmk').live('click',function(){
+		HienFormDoiMK();
 	});
 	
 	$('.btnlogin').live('click',function(){
@@ -127,18 +120,20 @@ function KiemTraTGKetThucPD(idPD)
 		type:'post',
 		data:{idPD:idPD},
 		success:function(data){
-        
 			var obj = jQuery.parseJSON(data);
             if (obj.result==1)
             {
                 KiemTraLanDauGia(idPD);
-                //
             }
-            else
-            {
-                ThongBao("Thời gian đấu giá kết thúc",2000);
-                window.location.reload();
-            }
+			if(obj.result==0)
+			{
+				ThongBaoLoi1("Phiên đấu này sắp diển ra.<br/>Bạn vui lòng xem thời gian bắt đầu phiên đấu.");
+			}
+			if(obj.result==-1)
+			{
+				ThongBao("Thời gian đấu giá kết thúc",2000);
+				window.location.reload();
+			}
 		}
 	});
     return false;	
@@ -245,8 +240,10 @@ function HienFormDangNhap()
 {
 	$('#bg_thongbao').show();
 	$('#thongbao').show();
-	$('#thongbao').html("<p class='title_tb'>Đăng Nhập</p><div class='content_tb'><table class='login'><tr><td colspan='2'><span class='thongbaologin'>Bạn cần đăng nhập trước khi đấu giá</span></td></tr><tr><td width='115'>Tên Đăng Nhập</td><td><input class='inputstyle' type='text' id='username' name='username'/></td></tr><tr><td>Mật Khẩu</td><td><input class='inputstyle' type='password' id='password' name='password'/></td></tr><tr><td><a href='javascript:;' onclick=\"KiemTraIDFBDangKy(document.getElementById('IdUserFB').value)\" class='btnregister'>Đăng Ký</a></td><td><input class='inputstyle2' type='button' name='btnlogin' value='Đăng Nhập' onclick=\"DangNhap({username:document.getElementById('username').value, password:document.getElementById('password').value, IdUserFB:document.getElementById('IdUserFB').value})\"/></td></tr><tr><td colspan='2'><span class='loidangnhap'></span></td></tr></table></div>");
+	$('#thongbao').html("<p class='title_tb'>Đăng Nhập</p><div class='content_tb'><table class='login'><tr><td colspan='2'><span class='thongbaologin'>Bạn cần đăng nhập trước khi đấu giá</span></td></tr><tr><td width='115'>Tên Đăng Nhập</td><td><input class='inputstyle' type='text' id='username' name='username'/></td></tr><tr><td>Mật Khẩu</td><td><input class='inputstyle' type='password' id='password' name='password'/></td></tr><tr><td></td><td><input class='inputstyle2' type='button' name='btnlogin' value='Đăng Nhập' onclick=\"DangNhap({username:document.getElementById('username').value, password:document.getElementById('password').value, IdUserFB:document.getElementById('IdUserFB').value})\"/></td></tr><tr><td colspan='2'><span class='loidangnhap'></span></td></tr><tr><td></td><td><a href='javascript:;' onclick=\"KiemTraIDFBDangKy(document.getElementById('IdUserFB').value)\" class='btnregister'>Đăng Ký</a>/<a href='javascript:;' onclick=\"HienFormQuenMK(document.getElementById('IdUserFB').value)\" class='btnregister'>Quên mật khẩu</a></td></tr></table></div>");
 }
+
+
 
 function DangNhap(ops)
 {
@@ -272,7 +269,7 @@ function DangNhap(ops)
 			if(obj.result == 1)
 			{
 				ThongBao("Đăng nhập thành công",1500);
-				$('li.username').html("<a href='javascript:;'>"+ obj.data[0]["hoten"] +"</a><ul><li><a class='menudangxuat' href='javascript:;'>Đăng Xuất</a></li></ul>");
+				$('li.username').html("<a href='javascript:;'>"+ obj.data[0]["hoten"] +"</a><ul><li><a class='menuquenmk' href='javascript:;'>Đổi Mật Khẩu</a><li><a class='menudangxuat' href='javascript:;'>Đăng Xuất</a></li></ul>");
 			}
 			else
 				$('span.loidangnhap').html("Tên đăng nhập hoặc mật khẩu không đúng.</br>Lưu ý : Tài khoản trên ứng dụng chỉ đăng nhập thành công trên tài khoản Facebook đã tạo ra trước đó.");
@@ -310,7 +307,7 @@ function KiemTraIDFBDangKy(IdUserFB)
 			else
 			{
 				//alert('Khong DK duoc roi');
-				ThongBaoLoi1("IDFB : " + obj.IdUserFB + "<br/>Tài khoản FB này đã tạo tài khoản trên ứng dụng.<br/>Bạn cần phải đăng nhập để đấu giá. ");
+				ThongBaoLoi1("IDFB : " + obj.IdUserFB + "<br/>Tài khoản FB này đã tạo tài khoản trên ứng dụng. ");
 			}
 		}
 	});		
@@ -420,5 +417,119 @@ function DangKy(IdUserFB, NameUserFB, LinkFB, username, password, hoten, sdt, em
 		}
 	});		
 }
+
+function HienFormQuenMK(iduserFB)
+{
+	$('#bg_thongbao').show();
+	$('#thongbao').show();
+	$('#thongbao').html("<p class='title_tb'>Quên Mật Khẩu</p><div class='content_tb'><table class='login'><tr><td width='115'>ID Facebook</td><td><input class='inputstyle' readonly='true' type='text' id='iduserfb' name='iduserfb' value='"+iduserFB+"'/></td></tr><tr><td>Tên đăng nhâp</td><td><input class='inputstyle' type='text' id='username' name='username'/></td></tr><tr><td>Email</td><td><input class='inputstyle' type='text' id='email' name='email'/></td></tr><tr><td></td><td><input class='inputstyle2' type='button' name='btnlogin' value='Lấy lại mk' onclick = \"LayLaiMK(document.getElementById('email').value, document.getElementById('iduserfb').value, document.getElementById('username').value)\" /></td></tr><tr><td colspan='2'><span class='loilaymk'></span></td></tr></table></div>");
+}
+
+function LayLaiMK(email, iduserfb, username)
+{
+	//alert(email);
+	//alert(iduserfb);
+	if(username == "")
+	{
+		$('span.loilaymk').html("Tên đăng nhập không được để trống.");
+		return false;
+	}
+	if(checkmail(email) == false)
+	{
+		$('span.loilaymk').html("Email chưa đúng định dạng.");
+		return false;
+	}
+	$.ajax({
+		url:taaa.appdomain + '/Ajaxdaugia/laymatkhau',
+		type:'post',
+		data:{email:email, iduserfb:iduserfb, username:username},
+		success:function(data){
+			if(data == 1)
+			{
+				ThongBaoLoi1('Mật khẩu bạn đã thay đổi về 123456<br/>Hãy đổi lại mật khẩu.');
+				return false;
+			}
+			if(data == 0)
+			{
+				$('span.loilaymk').html("Không thể lấy lại mật khẩu.<br/>Thông tin bạn nhập chưa chính xác.");
+				return false;
+			}
+			
+		}
+	});
+}
+function HienFormDoiMK()
+{
+	$('#bg_thongbao').show();
+	$('#thongbao').show();
+	$('#thongbao').html("<p class='title_tb'>Đổi Mật Khẩu</p><div class='content_tb'><table class='login'><tr><td width='145'>Mật khẩu cũ</td><td><input class='inputstyle' type='password' id='oldpass' name='oldpass' /></td></tr><tr><td>Mật khẩu mới</td><td><input class='inputstyle' type='password' id='newpass' name='newpass'/></td></tr><tr><td>Nhập lại mật khẩu mới</td><td><input class='inputstyle' type='password' id='newrepass' name='newrepass'/></td></tr><tr><td></td><td><input class='inputstyle2' type='button' name='btnlogin' value='Đổi mật khẩu' onclick = \"ThayDoiMK(document.getElementById('IdUserFB').value, document.getElementById('oldpass').value, document.getElementById('newpass').value, document.getElementById('newrepass').value)\" /></td></tr><tr><td colspan='2'><span class='loidoimk'></span></td></tr></table></div>");
+}
+
+function ThayDoiMK(iduserfb, oldpass, newpass, newrepass)
+{
+	if(oldpass == "" || newpass == "" || newrepass == "")
+	{
+		$('span.loidoimk').html("Bạn cần phải nhập đủ thông tin.");
+			return false;
+	}
+	else
+	{
+		if(newpass.length <6)
+		{
+			$('span.loidoimk').html("Mật khẩu mới phải có chiều dài tối thiểu 6 ký tự.");
+				return false;
+		}
+		else
+		if(newpass != newrepass)
+		{
+			$('span.loidoimk').html("2 mật khẩu mới nhập không giống nhau.");
+			return false;
+		}
+	}
+	$('span.loidoimk').html("");
+	$.ajax({
+		url:taaa.appdomain + '/Ajaxdaugia/thaydoimatkhau',
+		type:'post',
+		data:{iduserfb:iduserfb, oldpass:oldpass, newpass:newpass},
+		success:function(data){
+			if(data == 1)
+			{
+				ThongBaoLoi1('Mật khẩu của bạn thay đổi thành công.');
+				return false;
+			}
+			if(data == 0)
+			{
+				$('span.loidoimk').html("Mật khẩu cũ nhập chưa chính xác.");
+				return false;
+			}
+			
+		}
+	});	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

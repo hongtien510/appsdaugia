@@ -179,20 +179,28 @@ class AjaxdaugiaController extends App_Controller_FrontController {
 		$daugia = App_Models_DaugiaModel::getInstance();
 		
         $idPD = $_POST["idPD"];
-        //echo $idPD = 19;
-        $sql = "Select tgketthuc From ishali_bid_phiendau where idPD = " . $idPD;
+        $sql = "Select tgketthuc, tgbatdau From ishali_bid_phiendau where idPD = " . $idPD;
         $data = $daugia->ThucThiTruyVan($sql);
         
-        $TGKetThuc = $data[0]["tgketthuc"].'<br/>';
+		$TGBatDau = $data[0]['tgbatdau'];
+        $TGKetThuc = $data[0]["tgketthuc"];
         $datenow = date("Y-m-d H:i:s");
-        
-        if($TGKetThuc>$datenow)
-            $result = 1;
-        else
-            $result = 0;
-            
+
+		if($TGKetThuc < $datenow)
+			$result = -1;//PD Ket Thuc
+		else
+		{
+			if($TGBatDau > $datenow)
+			{
+				$result = 0;//PD Dang sap dien ra
+			}
+			else
+				$result = 1;//PD Dang dien ra
+		}
+
         $kq=array('result'=>$result);
         echo Zend_Json::encode($kq);
+		
 	}
     
     public function kiemtralandaugiaAction() {
@@ -224,4 +232,55 @@ class AjaxdaugiaController extends App_Controller_FrontController {
             echo "1";
 		
     }
+	
+	public function laymatkhauAction()
+	{
+		$this->_helper->viewRenderer->setNoRender(true);
+		$this->_helper->layout->disableLayout();
+		$daugia = App_Models_DaugiaModel::getInstance();
+		
+		$email = $_POST['email'];
+		$iduserfb = $_POST['iduserfb'];
+		$username = $_POST['username'];
+		
+		$sql = "Select iduser from ishali_bid_user ";
+		$sql.= "where email = '". $email ."' and ";
+		$sql.= "iduserFB = '". $iduserfb ."' and ";
+		$sql.= "username = '". $username ."'";
+		$data = $daugia->ThucThiTruyVan($sql);
+		//echo $data[0]['iduser'];
+		
+		if(count($data)==1)
+		{
+			$sql = "Update ishali_bid_user set `password` = '". sha1(123456). "' where iduser = ". $data[0]['iduser'];
+			$data = $daugia->ThucThiTruyVan($sql);
+			echo 1;
+		}
+		else
+			echo 0;
+		
+	}
+	
+	public function thaydoimatkhauAction()
+	{
+		$this->_helper->viewRenderer->setNoRender(true);
+		$this->_helper->layout->disableLayout();
+		$daugia = App_Models_DaugiaModel::getInstance();
+		
+		$iduserfb = $_POST['iduserfb'];
+		$oldpass = sha1($_POST['oldpass']);
+		$newpass = sha1($_POST['newpass']);
+		
+		$sql = "Select 1 from ishali_bid_user where iduserFB = '". $iduserfb ."' and `password` = '". $oldpass ."'";
+		$data = $daugia->ThucThiTruyVan($sql);
+		if(count($data)==1)
+		{
+			$sql = "Update ishali_bid_user set `password` = '". $newpass . "' where iduserFB = '". $iduserfb ."'";
+			$data = $daugia->ThucThiTruyVan($sql);
+			echo 1;
+		}
+		else
+			echo 0;
+		
+	}
 }

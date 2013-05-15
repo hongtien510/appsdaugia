@@ -15,9 +15,8 @@ $(document).ready(function(){
 		type:'post',
 		data:{},
 		success:function(data){
-		  //alert(data);
             alert("Đăng xuất thành công");
-            window.location="../admin";
+            window.location= taaa.appdomain + '/admin/loginadmin';
 		}
 	   });	
     });
@@ -39,7 +38,7 @@ function LoginAdmin(ops)
 			if(data==1)
             {
                 alert("Đăng nhập thành công");
-                window.location="../admin/";
+                window.location= taaa.appdomain + '/admin';
             }
             else
                 alert("Đăng nhập không thành công");

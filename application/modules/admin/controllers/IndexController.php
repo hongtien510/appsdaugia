@@ -8,7 +8,9 @@ class Admin_IndexController extends App_Controller_AdminController {
     }
 
     public function indexAction() {
-        
+        if(!isset($this->_SESSION->iduseradmin))
+		$link = APP_DOMAIN .'/admin/loginadmin';
+			header("Location:$link");
         $facebookadmin = new Ishali_FacebookAdmin();  
         $facebook = new Ishali_Facebook();  
 		$facebook->begins_works('1');

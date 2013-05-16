@@ -64,3 +64,16 @@ function ThongBao(nd,time)
 	$('#thongbao').html("<p class='title_tb'>Thông Báo</p><div class='content_tb'>"+nd+"</div>");
 	myVar = setTimeout(function(){$('#thongbao').hide(); $('#bg_thongbao').hide();return false},time);
 }
+function ThongBaoLoi1(nd)
+{
+	$('#bg_thongbao').show();
+	$('#thongbao').show();
+	$('#thongbao').html("<p class='title_tb'>Thông báo</p><div class='content_tb'>"+nd+"</div><p class='bt_dongy_tb' onclick=\"Ok_ThongBaoLoi1()\">Đồng ý</p>");
+}
+
+function Ok_ThongBaoLoi1()
+{
+	$('#thongbao').hide(); 
+	$('#bg_thongbao').hide();
+	return false;
+}

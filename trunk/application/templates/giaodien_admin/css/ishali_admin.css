@@ -249,9 +249,26 @@ display:none;
 	position:fixed;
 	z-index:10;
 }
-#thongbao{display:none; width:350px; border:1px solid #67A769; margin-top:10%; margin-left:35%; position:fixed; z-index:20}
+#thongbao{display:none; width:350px; border:1px solid #67A769; margin-top:10%; margin-left:35%; position:fixed; z-index:20; background:white;}
 p.title_tb{width:340px; height:23px; background:#67A769; padding-top:5px; font-size:15px; font-weight:bold; color:white; padding-left:10px; }
 .content_tb{width:330px; background:white; padding:15px 10px 20px; font-size:13px; font-weight:bold;max-height:300px; overflow:auto}
+
+p.bt_dongy_tb{
+	background:#67A769;
+    color: white;
+    cursor: pointer;
+    float: right;
+    font-size: 13px;
+    font-weight: bold;
+    height: 20px;
+    padding-top: 5px;
+    position: relative;
+    right: 10px;
+    text-align: center;
+    top: -10px;
+    width: 75px;
+}
+
 
 table.spdg{width:96%;border-collapse: collapse; margin: 15px auto}
 table.spdg tr td{padding:5px; border:1px solid #000; line-height:17px;}

@@ -1,0 +1,24 @@
+.cntSeparator {
+    color: #000000;
+    font-size: 20px;
+    margin: 5px 3px 0 2px
+}
+
+.desc { //margin: 7px 3px; }
+.desc div {
+	float: left;
+	font-family: Arial;
+	width: 10px;
+	margin-right: 54px;
+	font-size: 13px;
+	font-weight: bold;
+	color: #000;
+}
+
+
+
+
+
+
+
+

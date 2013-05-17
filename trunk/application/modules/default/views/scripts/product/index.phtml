@@ -1,36 +1,78 @@
-
 <?php
 	$dg = App_Models_DaugiaModel::getInstance();
 	$ShowPhienDau = $this->ShowPhienDau;
 	$NguoiDauCaoNhat = $this->NguoiDauCaoNhat;
-
+	
+	$TimeCD = $this->TimeCountDown;
+	$LoaiPD = $this->LoaiPhienDau;
+	//print_r($TimeCD);
+	
     $LinkAppHost = 'http://' . $_SERVER['SERVER_NAME'].Zend_Controller_Front::getInstance()->getRequest()->getRequestUri();
-
+	$datenow = date("Y-m-d H:i:s");
 
 	// $facebook = new Ishali_Facebook();
 	// $fb = $facebook->getFB();		
 	// $pages = $fb->api('/me');
-    
-    
 ?>
+	
+
 
 <div id="daugia">
 		<img class="main_img" src="<?php echo APP_DOMAIN . '/application/layouts/' . $this->page->templates . '/images/upload/images/' . $ShowPhienDau[0]["urlhinh"] ?>" alt="nem" title="nem">
 		<div id="content_dg">
-            <span class="textstyle2"><?php echo $ShowPhienDau[0]["tensp"]?></span><br />
+            <p class="textstyle2 tensp_dg"><?php echo $ShowPhienDau[0]["tensp"]?></p>
+			<!--
 			<span class="textstyle1">Bắt đầu : </span> 
 				<span class="textstyle2"><?php echo $dg->CatThoigian($ShowPhienDau[0]["tgbatdau"])?></span></br>
+			
 			<span class="textstyle1">Kết thúc : </span> 
 				<span class="textstyle2"><?php echo $dg->CatThoigian($ShowPhienDau[0]["tgketthuc"])?></span></br>
-			<span class="textstyle1">Giá tham khảo : </span> 
-				<span class="textstyle2 gtk"><?php echo number_format($ShowPhienDau[0]["giaban"],0,',','.')?>đ</span></br>
-			<span class="textstyle1">Tiết kiệm : </span> 
+			-->
+			<?php
+				
+                if($ShowPhienDau[0]["tgketthuc"] > $datenow)
+				{
+					if($LoaiPD == 1)
+						echo "<span class='textstyle1'>Phiên đấu giá này sẽ kết thúc sau : </span>";
+					if($LoaiPD == 0)
+						echo "<span class='textstyle1'>Phiên đấu giá này sẽ bắt đầu sau : </span>";
+			?>
+					<script type="text/javascript">
+						$(function(){
+							$('#counter').countdown({
+								image: '<?php echo APP_DOMAIN . '/application/layouts/' . $this->page->templates . '/images/digits.png'?>',
+								//startTime: '09:09:60:59'
+								startTime: '<?php echo $TimeCD['ngay'].':'.$TimeCD['gio'].':'.$TimeCD['phut'].':'.$TimeCD['giay'];?>',
+								timerEnd: function(){ location.reload(); }
+							});
+						});
+					</script>
+			
+					<div class="count_down">
+						<div id="counter"></div>
+						<div class="desc">
+							<div>Ngày</div>
+							<div>Giờ</div>
+							<div>Phút</div>
+							<div>Giây</div>
+						</div>
+					</div>
+			<?php } ?>
+			<div class="clear"></div>
+			<p>
+				<span class="textstyle1">Giá tham khảo : </span> 
+				<span class="textstyle2 gtk"><?php echo number_format($ShowPhienDau[0]["giaban"],0,',','.')?>đ</span>
+			</p>
+			<p>
+				<span class="textstyle1">Tiết kiệm : </span> 
 				<span class="textstyle2"><?php if(!isset($NguoiDauCaoNhat[0]["giadau"])) echo number_format(($ShowPhienDau[0]["giaban"] - $ShowPhienDau[0]["giakhoidiem"]),0,',','.'); else echo number_format(($ShowPhienDau[0]["giaban"] - $NguoiDauCaoNhat[0]["giadau"]),0,',','.') ?>đ (<?php if(!isset($NguoiDauCaoNhat[0]["giadau"])) echo $dg->TinhPhanTramGiam($ShowPhienDau[0]["giaban"],($ShowPhienDau[0]["giaban"] - $ShowPhienDau[0]["giakhoidiem"])); else echo $dg->TinhPhanTramGiam($ShowPhienDau[0]["giaban"],($ShowPhienDau[0]["giaban"] - $NguoiDauCaoNhat[0]["giadau"]));?>%)</span></br>
+			</p>
+			
 			<p class="timebid"><span class="textstyle1"></span></p>
 			<span class="giabid"><?php if(!isset($NguoiDauCaoNhat[0]["giadau"])) echo number_format($ShowPhienDau[0]["giakhoidiem"],0,',','.'); else echo number_format($NguoiDauCaoNhat[0]["giadau"],0,',','.')?>đ</span>
             
             <?php 
-                $datenow = date("Y-m-d H:i:s");
+               
                 if($ShowPhienDau[0]["tgketthuc"]>$datenow)
                 
                 {
@@ -64,7 +106,7 @@
 			}
 			?>
             <?php 
-                $datenow = date("Y-m-d H:i:s");
+               
                 if($ShowPhienDau[0]["tgketthuc"]>$datenow)
                 
                 {

@@ -70,10 +70,10 @@ p.thoigianbid{float:left; width:185px; height:40px; text-align:left; line-height
 
 #daugia{width:100%; height:350px;}
 img.main_img{width:450px; height:300px; border:1px solid #999999; margin:20px 0px 20px 20px; float:left}
-#content_dg{width:300px; height:300px; float:left; padding:12px 0 20px 20px; line-height:30px;}
+#content_dg{width:300px; height:300px; float:left; padding:12px 0 20px 20px; line-height:24px; position:relative;}
 
 .gtk{text-decoration:line-through}
-.timebid{height:10px}
+.timebid{//height:10px}
 .giabid{color:red; font-size:25px; //font-weight:bold}
 .nguoibid{color:#006633; font-weight:bold; font-size:15px}
 a.dsnguoibid{color: red; font-size:13px; text-decoration:none}
@@ -99,7 +99,7 @@ ul.menutab li a{color:#006633; font-size:14px; font-weight:bold; text-decoration
 	padding:15px;
 }
 
-p.chiase{width:300px; height:30px}
+p.chiase{width:300px; height:30px; position:absolute; bottom:0px;}
 p.chiase a{}
 p.chiase a img{position:relative; top:-2px; height:18px;}
 
@@ -217,11 +217,11 @@ p.bt_dongy_tb{
     width: 75px;
 }
 
+.clear{clear:both}
 
 
-
-
-
+.tensp_dg{margin-bottom:10px; margin-top:2px}
+.count_down{margin-bottom:30px;}
 
 
 

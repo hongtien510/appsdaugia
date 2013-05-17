@@ -122,6 +122,131 @@ class App_Models_DaugiaModel {
 		return $data;
 	}
 	
+	public function TinhTongNgay($th)
+	{
+		$thang[0] = 0;
+		$thang[1] = 31;
+		$thang[2] = 28;
+		$thang[3] = 31;
+		$thang[4] = 30;
+		$thang[5] = 31;
+		$thang[6] = 30;
+		$thang[7] = 31;
+		$thang[8] = 31;
+		$thang[9] = 30;
+		$thang[10] = 31;
+		$thang[11] = 30;
+		$thang[12] = 31;
+	
+		$tong = 0;
+		while($th > 0)
+		{
+			$th = $th-1;
+			$tong = $tong + $thang[$th];
+		}
+		return $tong;
+	}
+	
+	public function KhoangGiay($datebd, $datekt)
+	{
+		//2013-03-08 20:00:00
+		//2013-05-17 10:00:25 -> now
+		$datenow = date("Y-m-d H:i:s");
+		//$datenow = '2013-05-17 11:55:00';
+		
+		$timenow['ng'] = substr($datenow,8,2);
+		$timenow['th'] = substr($datenow,5,2);
+		$timenow['nm'] = substr($datenow,0,4);
+		$timenow['h'] = substr($datenow,11,2);
+		$timenow['m'] = substr($datenow,14,2);
+		$timenow['s'] = substr($datenow,17,2);
+	
+		$timebd['ng'] = substr($datebd,8,2);
+		$timebd['th'] = substr($datebd,5,2);
+		$timebd['nm'] = substr($datebd,0,4);
+		$timebd['h'] = substr($datebd,11,2);
+		$timebd['m'] = substr($datebd,14,2);
+		$timebd['s'] = substr($datebd,17,2);
+		
+		$timekt['ng'] = substr($datekt,8,2);
+		$timekt['th'] = substr($datekt,5,2);
+		$timekt['nm'] = substr($datekt,0,4);
+		$timekt['h'] = substr($datekt,11,2);
+		$timekt['m'] = substr($datekt,14,2);
+		$timekt['s'] = substr($datekt,17,2);
+		
+		$thang[0] = 0;
+		$thang[1] = 31;
+		$thang[2] = 28;
+		$thang[3] = 31;
+		$thang[4] = 30;
+		$thang[5] = 31;
+		$thang[6] = 30;
+		$thang[7] = 31;
+		$thang[8] = 31;
+		$thang[9] = 30;
+		$thang[10] = 31;
+		$thang[11] = 30;
+		$thang[12] = 31;
+		
+		$giay3 = ($timenow['ng'] - 1 + $this->TinhTongNgay($timenow['th']))*24*60*60;
+		$giay4 = ($timenow['h']*60*60) + ($timenow['m']*60) + $timenow['s'];
+		$giaynow = $giay3 + $giay4;
+		
+		$KhoangGiay = 0;
+		$Flag = 0;
+		//PD Dang dien ra
+		if($datebd <= $datenow and $datekt > $datenow)
+		{
+			$giay1 = ($timekt['ng'] - 1 + $this->TinhTongNgay($timekt['th']))*24*60*60;
+			$giay2 = ($timekt['h']*60*60) + ($timekt['m']*60) + $timekt['s'];
+			$giaykt = $giay1 + $giay2;
+
+			$KhoangGiay = $giaykt - $giaynow;
+			$Flag = 1;
+		}
+		//PD Sap Dien Ra
+		if($datebd > $datenow)
+		{
+			$giay1 = ($timebd['ng'] - 1 + $this->TinhTongNgay($timebd['th']))*24*60*60;
+			$giay2 = ($timebd['h']*60*60) + ($timebd['m']*60) + $timebd['s'];
+			$giaybd = $giay1 + $giay2;
+
+			$KhoangGiay = $giaybd - $giaynow;
+			$Flag = 0;
+		}
+			$result['khoanggiay'] = $KhoangGiay;
+			$result['flag'] = $Flag;
+		
+		return $result;
+	}
+	
+	public function ChenSoDu2DonVi($so)
+	{
+		if($so<10)
+			return '0'.$so;
+		return $so;
+	}
+	
+	public function DoiGiayRaNgay($giay)
+	{
+		$Ngay = floor($giay / (24*60*60));
+		$SoDu = $giay % (24*60*60);
+		
+		$Gio = floor($SoDu / (60*60));
+		$SoDu1 = $SoDu % (60*60);
+		
+		$Phut = floor($SoDu1 / 60);
+		$Giay = $SoDu1 % 60;
+		
+		$result['ngay'] = $this->ChenSoDu2DonVi($Ngay);
+		$result['gio'] = $this->ChenSoDu2DonVi($Gio);
+		$result['phut'] = $this->ChenSoDu2DonVi($Phut);
+		$result['giay'] = $this->ChenSoDu2DonVi($Giay);
+		
+		return $result;
+	}
+	
 	public function NguoiDauCaoNhat($idPD)
 	{
 		$sql = "Select dg.iduser, hoten, giadau, thoigiandau from ishali_bid_daugia dg, ishali_bid_user user where dg.iduser = user.iduser and idpd = " . $idPD . " and giadau >= (Select Max(giadau) as giadau from ishali_bid_daugia where idpd = " . $idPD . ")";

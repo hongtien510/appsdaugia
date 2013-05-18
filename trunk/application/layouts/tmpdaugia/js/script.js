@@ -83,7 +83,7 @@ function ClickDauGia(ops)
     idPD = ops.idpd;
 	//IdUserFB = ops.IdUserFB;
 	
-     //alert (idPD);
+    //alert (idPD);
 	//alert (IdUserFB);
 	
     KiemTraDangNhap(idPD);
@@ -149,7 +149,6 @@ function KiemTraLanDauGia(idPD)
 		type:'post',
 		data:{idpd:idPD},
 		success:function(data){
-
 			if(data==1)
 			{
                 ThongBaoDauGia();
@@ -160,7 +159,6 @@ function KiemTraLanDauGia(idPD)
                 ThongBao("Bạn đang nắm giữ giá đấu cao nhất",2000);
 				return false;
 			}
-
 		}
 	});	  
 }
@@ -269,7 +267,7 @@ function DangNhap(ops)
 			if(obj.result == 1)
 			{
 				ThongBao("Đăng nhập thành công",1500);
-				$('li.username').html("<a href='javascript:;'>"+ obj.data[0]["hoten"] +"</a><ul><li><a class='menuquenmk' href='javascript:;'>Đổi Mật Khẩu</a><li><a class='menudangxuat' href='javascript:;'>Đăng Xuất</a></li></ul>");
+				$('li.username').html("<a href='javascript:;'>"+ obj.data[0]["hoten"] +"</a><ul class='ul_child_menu'><li><a class='menuquenmk' href='javascript:;'>Đổi Mật Khẩu</a><li><a class='menudangxuat' href='javascript:;'>Đăng Xuất</a></li></ul>");
 			}
 			else
 				$('span.loidangnhap').html("Tên đăng nhập hoặc mật khẩu không đúng.</br>Lưu ý : Tài khoản trên ứng dụng chỉ đăng nhập thành công trên tài khoản Facebook đã tạo ra trước đó.");

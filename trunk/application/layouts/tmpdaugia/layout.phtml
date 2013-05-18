@@ -64,11 +64,11 @@
 		<li><a href="daugiaketthuc">ĐG kết thúc</a></li>
         <li><a href="gioithieu">Giới Thiệu</a></li>
 		<li><a href="dieule">Điều Lệ</a></li>
-		<li><a href="lienhe">Liên Hệ</a></li>
+		<li class="last"><a href="lienhe">Liên Hệ</a></li>
 		<li class="username">
 		<?php 
 			if($SessionIdUser != 0)
-				echo "<a href='javascript:;'>$hoten</a><ul><li><a class='menuquenmk' href='javascript:;'>Đổi Mật Khẩu</a></li><li><a class='menudangxuat' href='javascript:;'>Đăng Xuất</a></li></ul>";
+				echo "<a href='javascript:;'>$hoten</a><ul class='ul_child_menu'><li><a class='menuquenmk' href='javascript:;'>Đổi Mật Khẩu</a></li><li><a class='menudangxuat' href='javascript:;'>Đăng Xuất</a></li></ul>";
 			else
 				echo "<a class='menudangnhap' href='javascript:;'>Đăng Nhập</a>";
 		?>	

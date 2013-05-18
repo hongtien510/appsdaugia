@@ -223,13 +223,24 @@ class AjaxdaugiaController extends App_Controller_FrontController {
 		//echo $sql;
 		
         $data = $daugia->ThucThiTruyVan($sql);
+		
 		if(count($data) > 0)
 		{
-			if ($data[0]["iduser"]==$idUser)
-            echo "0";
+			//echo $data[0]["iduser"];
+			if ($data[0]["iduser"]==$idUser){
+				echo "0";
+				return;
+			}
+			else{
+				echo "1";
+				return;
+			}
 		}
         else
+		{
             echo "1";
+			return;
+		}
 		
     }
 	

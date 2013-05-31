@@ -125,7 +125,7 @@ display:none;
 #formlogin,
 #thongbao{
 	display:none; 
-	width:400px; 
+	min-width:400px; 
 	border:1px solid #67A769; 
 	//margin-top:10%; 
 	//margin-left:18%; 

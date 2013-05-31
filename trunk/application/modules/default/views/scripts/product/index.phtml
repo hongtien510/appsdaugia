@@ -125,9 +125,18 @@
 			<a class="dsnguoibid" href="javascript:;" onclick = "DanhSachDauGia({idpd:<?php echo $ShowPhienDau[0]["idpd"]?>})">Danh sách người đấu giá</a>
 			<p class="chiase">
 				<iframe src="//www.facebook.com/plugins/like.php?href=http://www.facebook.com/TheGioiNem.co.m&amp;send=false&amp;layout=button_count&amp;width=106&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:106px; height:21px;" allowTransparency="true"></iframe>
-                
+                <!--
 				<a title="Chia sẻ trên Facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?s=100&p[title]=<?php echo $ShowPhienDau[0]["titlechiase"]?>&p[url]=<?php echo LINK_APPS; ?>&p[images][0]=<?php echo APP_DOMAIN . '/application/layouts/' . $this->page->templates . '/images/upload/images/' . $ShowPhienDau[0]["urlhinh"] ?>&p[summary]=<?php echo $ShowPhienDau[0]["motachiase"]?>"><img alt="Facebook" src="http://ishali.com.vn/public/default/images/icon_facebook.png"></a>
-                <a title="Chia sẻ lên Zing Me" target="_blank" href="http://link.apps.zing.vn/share?u=<?php echo LINK_APPS; ?>"><img src="http://ishali.com.vn/public/default/images/small_zing_icon.png"/></a>
+                -->
+				<?php
+					$linkshare = LINK_APPS.'?app_data='.$ShowPhienDau[0]["idpd"];
+					$picture = APP_DOMAIN . '/application/layouts/' . $this->page->templates . '/images/upload/images/' . $ShowPhienDau[0]["urlhinh"];
+				?>
+				<a title="Chia sẻ trên Facebook" href="javascript:;" onclick="danglentuong(<?php echo "'".$ShowPhienDau[0]["titlechiase"] ."', '". $ShowPhienDau[0]["tensp"] ."', '". $ShowPhienDau[0]["motachiase"] ."', '". $linkshare ."', '". $picture ."'"?>)">
+					<img alt="Facebook" src="http://ishali.com.vn/public/default/images/icon_facebook.png">
+				</a>
+				<!--danglentuong(title, cap, des, link, pic)-->
+				<a title="Chia sẻ lên Zing Me" target="_blank" href="http://link.apps.zing.vn/share?u=<?php echo LINK_APPS; ?>"><img src="http://ishali.com.vn/public/default/images/small_zing_icon.png"/></a>
             	<a title="Chia sẻ trên Google" target="_blank" href="https://plus.google.com/share?url=<?php echo LINK_APPS; ?>"><img alt="Google +1" src="http://ishali.com.vn/public/default/images/icon_googleplus.jpg"></a>
             	
 				<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo LINK_APPS; ?>">Tweet</a>

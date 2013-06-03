@@ -1,0 +1,65 @@
+<?php
+	$checkSessionIdpage = $this->checkSessionIdpage;
+	if($checkSessionIdpage == 0)
+	{
+		echo "<center><img  src='".APP_DOMAIN."/application/templates/giaodien_admin/images/chon page.jpg'/></center>";
+	}
+	else
+	{
+	$idPage = $this->idpage;
+	$config = $this->config;
+?>
+<p class="title_page">Cấu hình Apps</p>
+<form action="<?php echo APP_DOMAIN ?>/admin/config/xulyconfig" method="post" enctype="multipart/form-data" onsubmit="cauhinhapp();">
+<table class="table_config" border="1">
+	<tr>
+		<td width="200">Banner</td>
+		<td>
+			<input type="file" name="banner" id="" size="30" />
+			<?php if(@$config[0]['banner']!=""){ ?>
+				<img src="<?php echo APP_DOMAIN ?>/public/images/banner/<?php echo $config[0]['banner'] ?>" width="500" alt=""/>
+			<?php } ?>
+		</td>
+	</tr>
+	<tr>
+		<td>Footer</td>
+		<td><input class="input_style" type="text" name="footer" value="<?php echo @$config[0]['footer']?>" /></td>
+	</tr>
+	
+	<tr>
+		<td>Đơn vị tiền</td>
+		<td>
+			<input class="input_style1" type="text" name="donvitien" value="<?php echo @$config[0]['donvitien']?>" />
+			<em>(Mặc định là VNĐ)</em>
+		</td>
+	</tr>
+	<tr>
+		<td>Hiển thị thêm thông tin SP</td>
+		<td>
+			<input type="checkbox" name="thongtinsp" value="1" <?php if(@$config[0]['thongtinsp'] == 1) echo 'checked'; ?> />
+			<em>Bạn chọn chức năng này thì bạn phải nhập Tên menu bên dưới.</em>
+		</td>
+	</tr>
+	<tr>
+		<td>Tên menu thông tin SP</td>
+		<td>
+			<input class="input_style" type="text" name="menuthongtinsp" value="<?php echo @$config[0]['menuthongtinsp']?>" />
+			<br/><br/>
+			<em>Mỗi tên Menu Tab cách nhau bởi dấu ';'. Kết thúc 1 tên menu và bắt đầu 1 tên menu không có khoảng trắng</em>
+			<br/><br/>
+			Ví dụ : Hình ảnh;Thông Tin;Video;Bảng giá;Khuyến mãi
+		</td>
+	</tr>
+	<tr>
+		<td>Link Fanpage Facebook</td>
+		<td><input class="input_style" type="text" name="linkpage" value="<?php echo @$config[0]['link_page']?>" /></td>
+	</tr>
+	
+	
+	<tr>
+		<td></td>
+		<td><input type="submit" name="luucauhinh" value="Lưu cấu hình"/></td>
+	</tr>
+</table>
+</form>
+<?php } ?>

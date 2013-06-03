@@ -43,7 +43,8 @@ function LoginAdmin(ops)
             else
                 alert("Đăng nhập không thành công");
 		}
-	});	
+	});
+	
 }
 
 function getParameterValue(name)
@@ -77,3 +78,44 @@ function Ok_ThongBaoLoi1()
 	$('#bg_thongbao').hide();
 	return false;
 }
+
+function ThongBaoDongY(nd, link)
+{
+    $('#bg_thongbao').show();
+	$('#thongbao').show(); 
+	$('#thongbao').html("<p class='title_tb'>Thông Báo</p><div class='content_tb'><p>" +nd+ "</p><p class='dong_thongbao' onclick=\"CloseThongBaoDongY('"+link+"')\">Đóng</p>");
+}
+
+function CloseThongBaoDongY(link)
+{
+	$('#thongbao').hide(); 
+	$('#bg_thongbao').hide();
+	//window.location = link;
+	top.location.href = link;
+}
+
+
+function ThongBaoTuChuyenTrang(nd, time, link)
+{
+	$('#bg_thongbao').show();
+	$('#thongbao').show();
+	$('#thongbao').html("<p class='title_tb'>Thông Báo</p><div class='content_tb'>"+nd+"</div>");
+	/*myVar = setTimeout(function(){
+		top.location.href = link;
+		return false
+	},time);*/
+}
+
+
+function customerLoadWindow(pageURL, title,w,h) {
+	var left = (screen.width/2)-(w/2);
+	var top = (screen.height/2)-(h/2);
+	var targetWin = window.open (pageURL, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+}
+
+function ChangeListPage(idpage)
+{
+	if(idpage != 0)
+		window.location = "?idpage="+idpage;
+}
+

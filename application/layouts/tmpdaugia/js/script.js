@@ -34,6 +34,9 @@ $(document).ready(function(){
 		$('#tabvideo').show();
 	});
 	
+	
+	
+	
 	function RemoveActive(){
 		$('ul.menutab li').removeClass('active');
 	}
@@ -178,17 +181,26 @@ function HuyDauGia()
 
 function DauGia(ops)
 {
- //alert(ops.idpd);
- //alert(ops.giadau);
- //return false;
+ // alert(ops.idpd);
+ // alert(ops.giadau);
+ // alert(taaa.appdomain + '/Ajaxdaugia');
+ // return false;
 	$.ajax({
 		url:taaa.appdomain + '/Ajaxdaugia',
 		type:'post',
 		data:{idpd:ops.idpd, giadau:ops.giadau},
 		success:function(data){
-		  //alert(data);
-			ThongBao("Bạn đã đấu giá thành công",1500);
-			location.reload(true);
+			//alert(data);
+			if(data == 1)
+			{
+				ThongBao("Bạn đã đấu giá thành công",1500);
+				location.reload(true);
+			}
+			else
+			{
+				ThongBaoLoi1("Đấu giá không thành công,<br/>vui lòng thực hiện lại thao tác");
+			}
+			
 		}
 	});	
 }
@@ -518,6 +530,14 @@ function danglentuong(title, cap, des, link, pic) {
 		description: des
 	  }
 	);
+}
+
+function ChangeTabActive(idsp, idtab)
+{
+	$('.childtab').removeClass('active');
+	$('#'+idtab).addClass('active');
+	$('.ctntab').hide();
+	$('#ctntab'+idtab).show();
 }
 
 

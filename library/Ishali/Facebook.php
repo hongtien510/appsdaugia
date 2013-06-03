@@ -48,23 +48,26 @@ class Ishali_Facebook extends Ishali_Api{
 	}
 	
 	public static function begins_works($isadmin=NULL)
-	    {
+	{
 	    	
-			 $userid= Ishali_Facebook::getuserfbid();
-
-		    if ($userid) {
+		$userid= Ishali_Facebook::getuserfbid();
+		if($isadmin == 1)
+		{
+			if ($userid) {
 				return true;
 			}
 			else
 			{
 				 try {
 					Ishali_Facebook::loginuserfb($isadmin);
-			     } catch (FacebookApiException $e) {
-			     	Ishali_Facebook::loginuserfbException($isadmin);
-	 			 }
+				 } catch (FacebookApiException $e) {
+					Ishali_Facebook::loginuserfbException($isadmin);
+				 }
 			}
-	       
-	    }
+		}
+		else
+			return true;    
+	}
     
 	  public  static function getpagearr()
 		  {
@@ -79,7 +82,7 @@ class Ishali_Facebook extends Ishali_Api{
 				{
 					$config = Zend_Registry::get(APPLICATION_CONFIG);
 					$app_secret = $config->facebook->appsecret;
-				    $data =Ishali_Api::parse_signed_request($_REQUEST["signed_request"], $app_secret);
+				    @$data =Ishali_Api::parse_signed_request($_REQUEST["signed_request"], $app_secret);
 					return $data;
 				}
 		  }

@@ -1,4 +1,11 @@
 <?php
+	$checkSessionIdpage = $this->checkSessionIdpage;
+	if($checkSessionIdpage == 0)
+	{
+		echo "<center><img  src='".APP_DOMAIN."/application/templates/giaodien_admin/images/chon page.jpg'/></center>";
+	}
+	else
+	{
     $DieuLe = $this->dieule;
 ?>
 
@@ -10,12 +17,11 @@
 
 </form>
 
-<script>
-	
+<script>	
 	var editor1 = CKEDITOR.replace( 'ckdieule' );
 	CKFinder.setupCKEditor( editor1, '../public/ckfinder/' ) ;
-
 </script>
+<?php } ?>
 
 
 

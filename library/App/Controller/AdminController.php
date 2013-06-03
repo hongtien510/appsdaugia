@@ -15,6 +15,18 @@ class App_Controller_AdminController extends Zend_Controller_Action {
         $layoutPath = APPLICATION_PATH . '/templates/giaodien_admin';
         $option = array('layout' => 'index', 'layoutPath' => $layoutPath);
         Zend_Layout::startMvc($option);
+		
+		$facebook = new Ishali_Facebook();
+		$facebook->getuserfbid();
+		if($facebook->getpageid() != "")
+		{
+			@$idpage = $facebook->getpageid();
+			@$_SESSION['idpage'] = $idpage;
+		}
+		else
+		{
+			@$idpage = $_SESSION['idpage'];
+		}
     }
 
 }

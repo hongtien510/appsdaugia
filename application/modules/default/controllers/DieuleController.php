@@ -8,11 +8,14 @@ class DieuleController extends App_Controller_FrontController {
 
     public function indexAction() {
 		$daugia = $this->view->info = App_Models_DaugiaModel::getInstance();
+		$idpage = $_SESSION['idpage'];
 		
-        $sql = "Select baiviet from ishali_bid_baiviet where idbv = 1";
+        $sql = "Select baiviet from ishali_bid_baiviet where idbv = 1 and idpage = '". $idpage ."'";
         $data = $daugia->ThucThiTruyVan($sql);
-        
-        $this->view->dieule = $data[0]["baiviet"];
+        if(count($data)>0)
+			$this->view->dieule = $data[0]["baiviet"];
+		else
+			$this->view->dieule = "";
         
     }
 

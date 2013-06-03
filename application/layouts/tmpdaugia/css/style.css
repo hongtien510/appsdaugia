@@ -87,16 +87,13 @@ ul.menutab li a{color:#006633; font-size:14px; font-weight:bold; text-decoration
 
 #listtab{width:758px; margin-left:20px; height:auto; border:1px solid #5FBC2A; margin-top:-1px}
 
-#tabthongso,
-#tabhinhanh,
-#tabvideo{
+
+.ctntab{
+	padding:15px;
 	display:none;
 }
-#tabgioithieu,
-#tabthongso,
-#tabhinhanh,
-#tabvideo{
-	padding:15px;
+#ctntab1{
+	display:block;
 }
 
 p.chiase{width:300px; height:30px; position:absolute; bottom:0px;}

@@ -24,7 +24,28 @@ class App_Models_DaugiaModel {
         return self::$_instance;
     }
 	
-	public function ShowAllPhienDau()
+	public function SelectQuery($sql)
+	{
+        $data = $this->_db->executeReader($sql);
+  			return $data;
+	}
+    
+    public function InsertDeleteUpdateQuery($sql)
+	{
+        $data = $this->_db->executeReader($sql); 
+  			if(!isset($data))
+                return 0;
+            else
+                return 1;
+	}
+	
+	public function ThucThiTruyVan($sql)
+	{
+		$data = $this->_db->executeReader($sql);
+		return $data;
+	}
+	
+	public function ShowAllPhienDau($idpage)
 	{
 		$datenow = date("Y-m-d H:i:s");
 
@@ -35,7 +56,7 @@ class App_Models_DaugiaModel {
 		
 		$sql  = "Select idpd, pd.idsp, pd.giaban, tensp, urlhinh, giakhoidiem, buocgia, tgbatdau, tgketthuc ";
 		$sql .= "from ishali_bid_phiendau pd, ishali_bid_sanpham sp ";
-		$sql .= "where pd.idsp = sp.idsp and tgbatdau <= '" .$datenow ."' and tgketthuc > '" .$datenow ."'";
+		$sql .= "where pd.idsp = sp.idsp and tgbatdau <= '" .$datenow ."' and tgketthuc > '" .$datenow ."' and pd.idpage = '". $idpage ."'";
 		//echo $sql;
 		$data = $this->_db->executeReader($sql);
         if (!empty($data)) {
@@ -43,7 +64,7 @@ class App_Models_DaugiaModel {
         }
 	}
     
-    public function ShowAllPhienDauKetThuc()
+    public function ShowAllPhienDauKetThuc($idpage)
 	{
 		$datenow = date("Y-m-d H:i:s");
 
@@ -54,7 +75,7 @@ class App_Models_DaugiaModel {
 		
 		$sql  = "Select idpd, pd.idsp, pd.giaban, tensp, urlhinh, giakhoidiem, buocgia, tgbatdau, tgketthuc ";
 		$sql .= "from ishali_bid_phiendau pd, ishali_bid_sanpham sp ";
-		$sql .= "where pd.idsp = sp.idsp and tgketthuc < '" .$datenow ."'";
+		$sql .= "where pd.idpage = '". $idpage ."' and pd.idsp = sp.idsp and tgketthuc < '" .$datenow ."'";
 		//echo $sql;
 		$data = $this->_db->executeReader($sql);
         if (!empty($data)) {
@@ -62,7 +83,7 @@ class App_Models_DaugiaModel {
         }
 	}
 	
-	public function ShowAllPhienDauSapDienRa()
+	public function ShowAllPhienDauSapDienRa($idpage)
 	{
 		$datenow = date("Y-m-d H:i:s");
 
@@ -73,7 +94,7 @@ class App_Models_DaugiaModel {
 		
 		$sql  = "Select idpd, pd.idsp, pd.giaban, tensp, urlhinh, giakhoidiem, buocgia, tgbatdau, tgketthuc ";
 		$sql .= "from ishali_bid_phiendau pd, ishali_bid_sanpham sp ";
-		$sql .= "where pd.idsp = sp.idsp and tgbatdau > '" .$datenow ."'";
+		$sql .= "where pd.idpage = '". $idpage ."' and pd.idsp = sp.idsp and tgbatdau > '" .$datenow ."'";
 		//echo $sql;
 		$data = $this->_db->executeReader($sql);
         if (!empty($data)) {
@@ -114,10 +135,10 @@ class App_Models_DaugiaModel {
 	public function ShowPhienDau($idPD)
 	{
 		$sql  = "Select pd.idpd, pd.idsp, giaban, giakhoidiem, buocgia, tgbatdau, tgketthuc, ";
-		$sql .= "tensp, urlhinh, gioithieu, thongso, hinhanh, video, titlechiase, motachiase ";
+		$sql .= "tensp, urlhinh, titlechiase, motachiase ";
 		$sql .= "From ishali_bid_phiendau pd, ishali_bid_sanpham sp ";
 		$sql .= "Where pd.idsp = sp.idsp and idpd = " . $idPD;
-		
+
 		$data = $this->_db->executeReader($sql);
 		return $data;
 	}
@@ -260,12 +281,14 @@ class App_Models_DaugiaModel {
 	}
 	
 	
-	public function DauGia($idpd, $iduser, $giadau, $ip)
+	public function DauGia($idpd, $iduser, $giadau, $ip, $idpage)
 	{
-		$sql = "Insert into ishali_bid_daugia values('NULL', $idpd, $iduser, $giadau, now(), '$ip')";
-		
-        echo $sql;
-		$this->_db->executeReader($sql);
+		$sql = "Insert into ishali_bid_daugia(idpd, iduser, giadau, thoigiandau, ip, idpage)";
+		$sql.= "values($idpd, $iduser, $giadau, now(), '$ip', $idpage)";
+
+		//$this->_db->executeReader($sql);
+		$result = $this->InsertDeleteUpdateQuery($sql);
+		return $result;
 	}
 	
 	public function DanhSachDauGia($idpd)
@@ -331,11 +354,7 @@ class App_Models_DaugiaModel {
 		return $data[0]["hoten"];
 	}
 	
-	public function ThucThiTruyVan($sql)
-	{
-		$data = $this->_db->executeReader($sql);
-		return $data;
-	}
+	
 	
 	public function TachThoiGian($time)
 	{
@@ -410,6 +429,27 @@ class App_Models_DaugiaModel {
         }
         return $ip;
     }
+	
+	public function GetPageFbByIdUserFB()
+	{
+		$facebook = new Ishali_Facebook();
+        $iduser_fb = $facebook->getuserfbid();
+		$sql = "select id_pages, id_fb_page, page_name ";
+		$sql.= "from ishali_pages ";
+		$sql.= "where id_fb = " . $iduser_fb;
+			$lpage = $this->SelectQuery($sql);
+			return $lpage;
+	}
+	
+	public function KiemTraSessionIdPage($sessionIdPage)
+	{
+		$facebook = new Ishali_Facebook();
+		$idUserFB = $facebook->getuserfbid();
+		
+		$sql = "select 1 from ishali_pages where id_fb_page = '". $sessionIdPage ."' and id_fb = '". $idUserFB ."'";
+		$data = $this->SelectQuery($sql);
+		return count($data);
+	}
 
 }
 

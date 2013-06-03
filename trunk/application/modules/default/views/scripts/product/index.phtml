@@ -3,6 +3,10 @@
 	$ShowPhienDau = $this->ShowPhienDau;
 	$NguoiDauCaoNhat = $this->NguoiDauCaoNhat;
 	
+	$DonViTien = $this->donvitien;
+	$LinkPage = $this->link_page;
+	$ListMenu = $this->list_menu;
+	
 	$TimeCD = $this->TimeCountDown;
 	$LoaiPD = $this->LoaiPhienDau;
 	//print_r($TimeCD);
@@ -18,7 +22,7 @@
 
 
 <div id="daugia">
-		<img class="main_img" src="<?php echo APP_DOMAIN . '/application/layouts/' . $this->page->templates . '/images/upload/images/' . $ShowPhienDau[0]["urlhinh"] ?>" alt="nem" title="nem">
+		<img class="main_img" src="<?php echo APP_DOMAIN . '/application/layouts/tmpdaugia/images/upload/images/' . $ShowPhienDau[0]["urlhinh"] ?>" alt="nem" title="nem">
 		<div id="content_dg">
             <p class="textstyle2 tensp_dg"><?php echo $ShowPhienDau[0]["tensp"]?></p>
 			<!--
@@ -40,7 +44,7 @@
 					<script type="text/javascript">
 						$(function(){
 							$('#counter').countdown({
-								image: '<?php echo APP_DOMAIN . '/application/layouts/' . $this->page->templates . '/images/digits.png'?>',
+								image: '<?php echo APP_DOMAIN . '/application/layouts/tmpdaugia/images/digits.png'?>',
 								//startTime: '09:09:60:59'
 								startTime: '<?php echo $TimeCD['ngay'].':'.$TimeCD['gio'].':'.$TimeCD['phut'].':'.$TimeCD['giay'];?>',
 								timerEnd: function(){ location.reload(); }
@@ -77,7 +81,7 @@
                 
                 {
             ?>
-            <a href="<?php echo $LinkAppHost ?>"><img class="lammoi" src="<?php echo APP_DOMAIN . '/application/layouts/' . $this->page->templates . '/images/refresh.png'?>" alt="Refresh" title="Làm mới giá đấu"/></a>
+            <a href="<?php echo $LinkAppHost ?>"><img class="lammoi" src="<?php echo APP_DOMAIN . '/application/layouts/tmpdaugia/images/refresh.png'?>" alt="Refresh" title="Làm mới giá đấu"/></a>
             <?php } ?>
             <br/>
 			<span class="textstyle1">Người dấu giá cuối : </span> 
@@ -124,13 +128,13 @@
             ?>
 			<a class="dsnguoibid" href="javascript:;" onclick = "DanhSachDauGia({idpd:<?php echo $ShowPhienDau[0]["idpd"]?>})">Danh sách người đấu giá</a>
 			<p class="chiase">
-				<iframe src="//www.facebook.com/plugins/like.php?href=http://www.facebook.com/TheGioiNem.co.m&amp;send=false&amp;layout=button_count&amp;width=106&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:106px; height:21px;" allowTransparency="true"></iframe>
+				<iframe src="//www.facebook.com/plugins/like.php?href=<?php echo $LinkPage;?>&amp;send=false&amp;layout=button_count&amp;width=106&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:106px; height:21px;" allowTransparency="true"></iframe>
                 <!--
-				<a title="Chia sẻ trên Facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?s=100&p[title]=<?php echo $ShowPhienDau[0]["titlechiase"]?>&p[url]=<?php echo LINK_APPS; ?>&p[images][0]=<?php echo APP_DOMAIN . '/application/layouts/' . $this->page->templates . '/images/upload/images/' . $ShowPhienDau[0]["urlhinh"] ?>&p[summary]=<?php echo $ShowPhienDau[0]["motachiase"]?>"><img alt="Facebook" src="http://ishali.com.vn/public/default/images/icon_facebook.png"></a>
+				<a title="Chia sẻ trên Facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?s=100&p[title]=<?php echo $ShowPhienDau[0]["titlechiase"]?>&p[url]=<?php echo LINK_APPS; ?>&p[images][0]=<?php echo APP_DOMAIN . '/application/layouts/tmpdaugia/images/upload/images/' . $ShowPhienDau[0]["urlhinh"] ?>&p[summary]=<?php echo $ShowPhienDau[0]["motachiase"]?>"><img alt="Facebook" src="http://ishali.com.vn/public/default/images/icon_facebook.png"></a>
                 -->
 				<?php
 					$linkshare = LINK_APPS.'?app_data='.$ShowPhienDau[0]["idpd"];
-					$picture = APP_DOMAIN . '/application/layouts/' . $this->page->templates . '/images/upload/images/' . $ShowPhienDau[0]["urlhinh"];
+					$picture = APP_DOMAIN . '/application/layouts/tmpdaugia/images/upload/images/' . $ShowPhienDau[0]["urlhinh"];
 				?>
 				<a title="Chia sẻ trên Facebook" href="javascript:;" onclick="danglentuong(<?php echo "'".$ShowPhienDau[0]["titlechiase"] ."', '". $ShowPhienDau[0]["tensp"] ."', '". $ShowPhienDau[0]["motachiase"] ."', '". $linkshare ."', '". $picture ."'"?>)">
 					<img alt="Facebook" src="http://ishali.com.vn/public/default/images/icon_facebook.png">
@@ -146,20 +150,39 @@
 	</div>
 
 	<div id="detail">
+	<?php 
+	if($ListMenu != "")
+	{
+	$NoiDung = $this->noidung;
+	?>
 		<div id="menutab">
 			<ul class="menutab">
-				<li class="mb_gioithieu active" ><a href="javascript:;">Giới thiệu</a></li>
-				<li class="mb_thongso"><a href="javascript:;">Thông số</a></li>
-				<li class="mb_hinhanh"><a href="javascript:;">Hình ảnh</a></li>
-				<li class="mb_video" ><a href="javascript:;">Video</a></li>
+				<?php 
+					for($i=0; $i<count($ListMenu); $i++)
+					{
+				?>
+					<li onclick="ChangeTabActive(1,<?php echo $i+1;?>)" class="childtab <?php if($i==0) echo 'active';?>" id="<?php echo $i+1;?>" ><a href="javascript:;"><?php echo $ListMenu[$i];?></a></li>
+				<?php } ?>
+				<!--
+				<li onclick="ChangeTabActive(1,2)" class="childtab" id="2"><a href="javascript:;">Thông số</a></li>
+				-->
 			</ul>
 		</div>
 		<div id="listtab">
-			<div id="tabgioithieu"><?php echo $ShowPhienDau[0]["gioithieu"]?></div><!--End #tabgioithieu-->
-			<div id="tabthongso"><?php echo $ShowPhienDau[0]["thongso"]?></div><!--End #tabthongso-->
-			<div id="tabhinhanh"><?php echo $ShowPhienDau[0]["hinhanh"]?></div><!--End #tabhinhanh-->
-			<div id="tabvideo"><?php echo $ShowPhienDau[0]["video"]?></div><!--End #tabvideo-->
+			<?php 
+				for($i=0; $i<count($ListMenu); $i++)
+				{
+			?>
+				<div class="ctntab" id="ctntab<?php echo $i+1;?>"><?php echo $NoiDung[$i];?></div>
+			<?php } ?>
+			<!--<div class="ctntab" id="ctntab2">2</div>-->
 		</div>
+<?php } ?>
+	
+	
+	
+	
+	
         <div class="commentFB">
             <div id="fb-root"></div>
             <script>(function(d, s, id) {

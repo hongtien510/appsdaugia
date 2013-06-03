@@ -16,15 +16,20 @@ class HomeController extends App_Controller_FrontController {
 			header("location: $host/product?idPD=$idPD");
 		}
 
+		$idpage = $_SESSION['idpage'];
+		
 		$daugia = $this->view->info = App_Models_DaugiaModel::getInstance();
-		$ShowAllPhienDau = $daugia->ShowAllPhienDau();
+		$ShowAllPhienDau = $daugia->ShowAllPhienDau($idpage);
 		$this->view->ShowAllPhienDau = $ShowAllPhienDau;
         
-        $sql = "Select baiviet From ishali_bid_baiviet where idbv = 4";
+        $sql = "Select baiviet From ishali_bid_baiviet where idbv = 4 and idpage = '". $idpage ."'";
         
         $data = $daugia->ThucThiTruyVan($sql);
+        if(count($data) > 0)
+			$this->view->tinthongbao = $data[0]["baiviet"];
+		else
+			$this->view->tinthongbao = "";
         
-        $this->view->tinthongbao = $data[0]["baiviet"];
     }
 
    

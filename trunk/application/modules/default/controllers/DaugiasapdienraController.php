@@ -8,7 +8,10 @@ class DaugiasapdienraController extends App_Controller_FrontController {
 
     public function indexAction() {
 		$daugia = $this->view->info = App_Models_DaugiaModel::getInstance();
-		$ShowAllPhienDauSapDienRa = $daugia->ShowAllPhienDauSapDienRa();
+		
+		$idpage = $_SESSION['idpage'];
+		
+		$ShowAllPhienDauSapDienRa = $daugia->ShowAllPhienDauSapDienRa($idpage);
         $this->view->ShowAllPhienDauSapDienRa = $ShowAllPhienDauSapDienRa;
     }
 

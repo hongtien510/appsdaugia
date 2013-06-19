@@ -257,6 +257,11 @@ function HienFormDangNhap()
 
 function DangNhap(ops)
 {
+	
+	// alert(ops.username);
+	// alert(ops.password);
+	// alert(ops.IdUserFB);
+	// return false;
 	if(ops.username=="")
 	{
 		$('span.loidangnhap').html("Tên đăng nhập không được để trống");
@@ -272,10 +277,7 @@ function DangNhap(ops)
 		type:'post',
 		data:{username:ops.username, password:ops.password, IdUserFB:ops.IdUserFB},
 		success:function(data){
-		//alert(data);
 			var obj = jQuery.parseJSON(data);
-			//alert('aaaaaaaa');
-				//alert(obj.result);return false;
 			if(obj.result == 1)
 			{
 				ThongBao("Đăng nhập thành công",1500);
@@ -308,7 +310,7 @@ function KiemTraIDFBDangKy(IdUserFB)
 		type:'post',
 		data:{IdUserFB:IdUserFB},
 		success:function(data){
-
+			//alert(data);
 			var obj = jQuery.parseJSON(data);
 			if(obj.IdUserFB == 1)
 			{
@@ -316,14 +318,49 @@ function KiemTraIDFBDangKy(IdUserFB)
 			}
 			else
 			{
-				//alert('Khong DK duoc roi');
-				ThongBaoLoi1("IDFB : " + obj.IdUserFB + "<br/>Tài khoản FB này đã tạo tài khoản trên ứng dụng. ");
+				if(obj.IdUserFB == 0)
+				{
+					ThongBaoLoi1("IDFB : " + IdUserFB + "<br/>Tài khoản FB này đã tạo tài khoản trên ứng dụng. ");
+				}
+				else
+				{
+					ThongBaoLoi2("<span style='font-weight:normal'>Tài khoản Facebook này đã tạo tài khoản trên ứng dụng được cài vào Fanpage : </span>"+obj.IdUserFB+"<br/><br/><span style='font-weight:normal'>Nhấn <b>Đồng Ý</b> để tài khoản này sử dụng được trên Fanpage này.</span>", IdUserFB);
+				}
 			}
+
 		}
 	});		
-
-
 }
+
+
+function ThongBaoLoi2(nd, iduserfb)
+{
+	$('#bg_thongbao').show();
+	$('#thongbao').show();
+	$('#thongbao').html("<p class='title_tb'>Thông báo</p><div class='content_tb'>"+nd+"</div><p class='bt_dongy_tb' onclick=\"Ok_ThongBaoLoi2("+iduserfb+")\">Đồng ý</p>");
+}
+
+function Ok_ThongBaoLoi2(iduserfb)
+{
+
+	$.ajax({
+		url:taaa.appdomain + '/Ajaxdaugia/themuserdaugia',
+		type:'post',
+		data:{iduserfb:iduserfb},
+		success:function(data){
+			if(data == 1)
+			{
+				ThongBaoLoi1("Tạo tài khoản thành công.<br/>Bạn vui lòng đăng nhập để đấu giá.");
+			}
+			else
+			{
+				ThongBaoLoi1("Tạo tài khoản không thành công.<br/>Bạn vui lòng thực hiện lạ thao tác.");
+			}
+			
+		}
+	});	
+}
+
 
 function KiemTraDangKy(ops)
 {
@@ -437,8 +474,9 @@ function HienFormQuenMK(iduserFB)
 
 function LayLaiMK(email, iduserfb, username)
 {
-	//alert(email);
-	//alert(iduserfb);
+	// alert(email);
+	// alert(iduserfb);
+	// alert(username);
 	if(username == "")
 	{
 		$('span.loilaymk').html("Tên đăng nhập không được để trống.");
@@ -449,6 +487,8 @@ function LayLaiMK(email, iduserfb, username)
 		$('span.loilaymk').html("Email chưa đúng định dạng.");
 		return false;
 	}
+	$('span.loilaymk').html("");
+
 	$.ajax({
 		url:taaa.appdomain + '/Ajaxdaugia/laymatkhau',
 		type:'post',
@@ -464,7 +504,6 @@ function LayLaiMK(email, iduserfb, username)
 				$('span.loilaymk').html("Không thể lấy lại mật khẩu.<br/>Thông tin bạn nhập chưa chính xác.");
 				return false;
 			}
-			
 		}
 	});
 }
@@ -512,7 +551,6 @@ function ThayDoiMK(iduserfb, oldpass, newpass, newrepass)
 				$('span.loidoimk').html("Mật khẩu cũ nhập chưa chính xác.");
 				return false;
 			}
-			
 		}
 	});	
 	

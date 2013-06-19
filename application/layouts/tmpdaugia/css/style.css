@@ -81,11 +81,11 @@ a.dsnguoibid:hover{text-decoration:underline}
 input.price{width:110px;height:23px; text-align:center; font-size:16px;}
 
 #menutab{width:760px; margin-left:20px; height:30px; border-bottom:2px solid #5FBC2A}
-ul.menutab li{float:left; padding:6px 30px 4px; border:1px solid #999999; border-bottom:none;  border-radius:6px 6px 0px 0px; height:20px; margin-right:5px; cursor:pointer}
+ul.menutab li{float:left; padding:5px 30px 4px; border:1px solid #999999; border-bottom:none;  border-radius:6px 6px 0px 0px; height:20px; margin-right:5px; cursor:pointer}
 ul.menutab li a{color:#006633; font-size:14px; font-weight:bold; text-decoration:none}
 .active{background:url("../images/bg_tab.png")}
 
-#listtab{width:758px; margin-left:20px; height:auto; border:1px solid #5FBC2A; margin-top:-1px}
+#listtab{width:758px; margin-left:20px; height:auto; border:1px solid #5FBC2A; margin-top:-1px; font-size:12px; line-height:20px}
 
 
 .ctntab{

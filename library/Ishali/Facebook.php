@@ -88,10 +88,10 @@ class Ishali_Facebook extends Ishali_Api{
 		  }
     
     public  static function getpageid()
-	    {
-			$pageid = Ishali_Facebook::getpagearr();
-			return  @$pageid['page']['id'];
-	    }
+	{
+		$pageid = Ishali_Facebook::getpagearr();
+		return  @$pageid['page']['id'];
+	}
 	
 	public  static function getParameterUrl()
 	{
@@ -281,7 +281,13 @@ class Ishali_Facebook extends Ishali_Api{
 
 	}
     
-
+	public static function getLinkPage($idpage)
+	{
+		$fb = Ishali_Facebook::getFB();
+		$pages_fb =  $fb->api('/'.$idpage);
+		$linkpage = $pages_fb['link'];
+		return $linkpage;
+	}
     
     
 }

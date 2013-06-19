@@ -133,7 +133,8 @@
 				<a title="Chia sẻ trên Facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?s=100&p[title]=<?php echo $ShowPhienDau[0]["titlechiase"]?>&p[url]=<?php echo LINK_APPS; ?>&p[images][0]=<?php echo APP_DOMAIN . '/application/layouts/tmpdaugia/images/upload/images/' . $ShowPhienDau[0]["urlhinh"] ?>&p[summary]=<?php echo $ShowPhienDau[0]["motachiase"]?>"><img alt="Facebook" src="http://ishali.com.vn/public/default/images/icon_facebook.png"></a>
                 -->
 				<?php
-					$linkshare = LINK_APPS.'?app_data='.$ShowPhienDau[0]["idpd"];
+					//$linkshare = LINK_APPS.'?app_data='.$ShowPhienDau[0]["idpd"];
+					$linkshare = "";
 					$picture = APP_DOMAIN . '/application/layouts/tmpdaugia/images/upload/images/' . $ShowPhienDau[0]["urlhinh"];
 				?>
 				<a title="Chia sẻ trên Facebook" href="javascript:;" onclick="danglentuong(<?php echo "'".$ShowPhienDau[0]["titlechiase"] ."', '". $ShowPhienDau[0]["tensp"] ."', '". $ShowPhienDau[0]["motachiase"] ."', '". $linkshare ."', '". $picture ."'"?>)">

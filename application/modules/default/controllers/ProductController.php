@@ -6,7 +6,7 @@ class ProductController extends App_Controller_FrontController {
     }
 
     public function indexAction() {
-		$idpage = $_SESSION['idpage'];
+		echo $idpage = $_SESSION['idpage'];
 		$idPD = $_GET["idPD"];
 
 		$daugia = App_Models_DaugiaModel::getInstance();
@@ -36,6 +36,7 @@ class ProductController extends App_Controller_FrontController {
 			$donvitien = "VNĐ";
 		else
 			$donvitien = $data[0]['donvitien'];
+			
         $this->view->donvitien = $donvitien;
 		
 	//Link Page de gan vao Plugin Like

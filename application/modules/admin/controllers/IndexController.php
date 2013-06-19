@@ -58,8 +58,8 @@ class Admin_IndexController extends App_Controller_AdminController {
 		$userid = $_GET['userid'];
 		$appid = $_GET['appid'];
 		$status = $_GET['status'];
-		//$facebook = new Ishali_Facebook();
-		//$linkpage = $facebook->getLinkPage($pageid);
+		$facebook = new Ishali_Facebook();
+		$linkpage = $facebook->getLinkPage($pageid);
 		
 		if($status == 1)
 		{
@@ -74,10 +74,11 @@ class Admin_IndexController extends App_Controller_AdminController {
 				$link = "http://www.facebook.com/add.php?api_key=$appid&pages=1&page=$pageid";
 				echo "<script>customerLoadWindow('$link', '', '540', '400');</script>";
 				
-				$sql = "Insert into ishali_pages(id_fb_page, page_name, id_fb, templates) value(";
+				$sql = "Insert into ishali_pages(id_fb_page, page_name, id_fb, link_page, templates) value(";
 				$sql.= "'".$pageid."', ";
 				$sql.= "'".$pagename."', ";
 				$sql.= "'".$userid."', ";
+				$sql.= "'".$linkpage."', ";
 				$sql.= "'tmpdaugia') ";
 				
 				$data = $bid->InsertDeleteUpdateQuery($sql);

@@ -4,6 +4,7 @@ class HomeController extends App_Controller_FrontController {
 
     public function init() {
         parent::init();
+		$this->_SESSION=new Zend_Session_Namespace();
     }
 
     public function indexAction() {

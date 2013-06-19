@@ -74,9 +74,10 @@ class AjaxdaugiaController extends App_Controller_FrontController {
 		$username = $_POST["username"];
 		$password = sha1($_POST["password"]);
 		$IdUserFB = $_POST["IdUserFB"];
+		$idpage = $_SESSION['idpage'];
+
 		
-		$data = $daugia->DangNhap($username, $password, $IdUserFB);
-		//echo count($data);
+		$data = $daugia->DangNhap($username, $password, $IdUserFB, $idpage);
 		if(count($data)==1)
 		{
 			$result = 1;
@@ -99,20 +100,36 @@ class AjaxdaugiaController extends App_Controller_FrontController {
 		$daugia = App_Models_DaugiaModel::getInstance();
 		
 		$IdUserFB = $_POST["IdUserFB"];
-		//$IdUserFB = '100002151254254';
-		//$username = 'hongtien510';
-		
-		$data1 = $daugia->KiemTraIdFB($IdUserFB);
-		
-		if(isset($data1[0][1]))
-			$kq1 = $IdUserFB;
+		$idpage = $_SESSION['idpage'];
+
+		$data = $daugia->KiemTraIdFBvaIdPage($IdUserFB, $idpage);
+		if($data == '0')
+			$result = 0;
 		else
-			$kq1 = 1;
+		{
+			if($data == '1')
+				$result = 1;
+			else
+			{
+				$result = $data;
+			}
+		}
 		
-		
-		$kq=array('IdUserFB'=>$kq1,);
+		$kq=array('IdUserFB'=>$result);
 			echo Zend_Json::encode($kq);
 	
+	}
+	
+	public function themuserdaugiaAction(){
+		$this->_helper->viewRenderer->setNoRender(true);
+		$this->_helper->layout->disableLayout();
+		$daugia = App_Models_DaugiaModel::getInstance();
+
+		$iduserfb = $_POST['iduserfb'];
+		$idpage = $_SESSION['idpage'];
+		
+		echo $result = $daugia->ThemUserDauGia($iduserfb, $idpage);
+		
 	}
 	
 	
@@ -155,12 +172,15 @@ class AjaxdaugiaController extends App_Controller_FrontController {
 		$sdt = $_POST["sdt"];
 		$email = $_POST["email"];
 		$diachi = $_POST["diachi"];
-		//exit;
+		$idpage = $_SESSION['idpage'];
 		
 		
-		$daugia->DangKyUser($IdUserFB, $username, $password, $hoten, $NameUserFB, $LinkFB, $sdt, $email, $diachi);
-		echo "Đăng ký thành công";
-		//echo $IdUserFB.'     '.$username.'     '.$password.'     '.$hoten.'     '.$sdt.'     '.$email.'     '.$diachi;
+		$result = $daugia->DangKyUser($IdUserFB, $username, $password, $hoten, $NameUserFB, $LinkFB, $sdt, $email, $diachi, $idpage);
+		if($result == 1)
+			echo "Đăng ký thành công";
+		else
+			echo "Đăng ký không thành công.<br/>Vui lòng thực hiện lạ thao tác";
+	
 	}
 	
 	public function testAction() {
@@ -261,9 +281,9 @@ class AjaxdaugiaController extends App_Controller_FrontController {
 		$data = $daugia->ThucThiTruyVan($sql);
 		//echo $data[0]['iduser'];
 		
-		if(count($data)==1)
+		if(count($data) >= 1)
 		{
-			$sql = "Update ishali_bid_user set `password` = '". sha1(123456). "' where iduser = ". $data[0]['iduser'];
+			$sql = "Update ishali_bid_user set `password` = '". sha1(123456). "' where iduserFB = ". $iduserfb ."' and username = '". $username ."'";
 			$data = $daugia->ThucThiTruyVan($sql);
 			echo 1;
 		}
@@ -281,10 +301,12 @@ class AjaxdaugiaController extends App_Controller_FrontController {
 		$iduserfb = $_POST['iduserfb'];
 		$oldpass = sha1($_POST['oldpass']);
 		$newpass = sha1($_POST['newpass']);
+		$idpage = $_SESSION['idpage'];
 		
-		$sql = "Select 1 from ishali_bid_user where iduserFB = '". $iduserfb ."' and `password` = '". $oldpass ."'";
+		$sql = "Select 1 from ishali_bid_user where iduserFB = '". $iduserfb ."' and `password` = '". $oldpass ."' and idpage ='". $idpage. "'";
 		$data = $daugia->ThucThiTruyVan($sql);
-		if(count($data)==1)
+
+		if(count($data)>0)
 		{
 			$sql = "Update ishali_bid_user set `password` = '". $newpass . "' where iduserFB = '". $iduserfb ."'";
 			$data = $daugia->ThucThiTruyVan($sql);

@@ -298,9 +298,9 @@ class App_Models_DaugiaModel {
 		return $data;
 	}
 	
-	public function DangNhap($username, $password, $IdUserFB)
+	public function DangNhap($username, $password, $IdUserFB, $idpage)
 	{
-		$sql = "Select * from ishali_bid_user where username = '".$username."' and password = '".$password."' and iduserFB = '".$IdUserFB."'";
+		$sql = "Select * from ishali_bid_user where username = '".$username."' and password = '".$password."' and iduserFB = '".$IdUserFB."' and idpage = '". $idpage ."'";
 		//echo $sql;
 		$data = $this->_db->executeReader($sql);
 		return $data;
@@ -312,6 +312,77 @@ class App_Models_DaugiaModel {
 		$data = $this->_db->executeReader($sql);
 		return $data;
 	}
+	
+	public function getNamePageByIdPage($idpage)
+	{
+		$sql = "select page_name from ishali_pages where id_fb_page = '". $idpage ."'";
+		$data = $this->SelectQuery($sql);
+		if(count($data)>0)
+			$pageName = $data[0]['page_name'];
+		else
+			$pageName = "";
+		
+		return $pageName;
+	}
+	
+	public function KiemTraIdFBvaIdPage($iduserFB, $idpage)
+	{
+		$sql = "Select 1 from ishali_bid_user where iduserFB = '$iduserFB'";
+		$data = $this->SelectQuery($sql);
+		
+		if(count($data)>0)
+		{
+			$ListPage = "";
+			$sql = "Select idpage from ishali_bid_user where iduserFB = '$iduserFB' order by iduser desc";
+			$data = $this->SelectQuery($sql);
+			for($i=0; $i<count($data); $i++)
+			{
+				if($data[$i]['idpage'] == $idpage)
+					return 0;
+					
+				$namePage = $this->getNamePageByIdPage($data[$i]['idpage']);
+				if($i==0){
+					$ListPage .= $namePage;
+				}else{
+					$ListPage .= ', '.$namePage;
+				}
+			}
+			return $ListPage;
+		}
+		return 1;//Cho phep DK
+	}
+	
+	public function ThemUserDauGia($iduser, $idpage)
+	{
+		$sql = "select * from ishali_bid_user where iduserFB = '". $iduser ."' limit 0,1";
+		$data = $this->SelectQuery($sql);
+		$username = $data[0]['username'];
+		$password = $data[0]['password'];
+		$hoten = $data[0]['hoten'];
+		$tenfb = $data[0]['tenfb'];
+		$linkfb = $data[0]['linkfb'];
+		$sdt = $data[0]['sdt'];
+		$email = $data[0]['email'];
+		$diachi = $data[0]['diachi'];
+		
+		$sql = "Insert into ishali_bid_user(iduserFB, username, password, hoten, tenfb, linkfb, sdt, email, diachi, ngaydangky, idpage) value (";
+		$sql.= "'". $iduser ."', ";
+		$sql.= "'". $username ."', ";
+		$sql.= "'". $password ."', ";
+		$sql.= "'". $hoten ."', ";
+		$sql.= "'". $tenfb ."', ";
+		$sql.= "'". $linkfb ."', ";
+		$sql.= "'". $sdt ."', ";
+		$sql.= "'". $email ."', ";
+		$sql.= "'". $diachi ."', ";
+		$sql.= "now(), ";
+		$sql.= "'". $idpage ."')";
+
+		$data = $this->InsertDeleteUpdateQuery($sql);
+		return $data;
+
+	}
+	
 	public function KiemTraUsername($username)
 	{
 		$sql = "Select 1 from ishali_bid_user where username = '$username'";
@@ -319,11 +390,22 @@ class App_Models_DaugiaModel {
 		return $data;
 	}
 	
-	public function DangKyUser($IdUserFB, $username, $password, $hoten, $NameUserFB, $LinkFB, $sdt, $email, $diachi)
+	public function DangKyUser($IdUserFB, $username, $password, $hoten, $NameUserFB, $LinkFB, $sdt, $email, $diachi, $idpage)
 	{
-		$sql = "Insert into ishali_bid_user values('NULL', '". $IdUserFB ."', '". $username ."', '". $password ."', '". $hoten ."', '". $NameUserFB ."', '". $LinkFB ."', '". $sdt ."', '". $email ."', '". $diachi ."', now())";
-		
-		$data = $this->_db->executeReader($sql);
+		$sql = "Insert into ishali_bid_user(iduserFB, username, `password`, hoten, tenfb, linkfb, sdt, email, diachi, ngaydangky, idpage) values(";
+		$sql.= "'". $IdUserFB ."', ";
+		$sql.= "'". $username ."', ";
+		$sql.= "'". $password ."', ";
+		$sql.= "'". $hoten ."', ";
+		$sql.= "'". $NameUserFB ."', ";
+		$sql.= "'". $LinkFB ."', ";
+		$sql.= "'". $sdt ."', ";
+		$sql.= "'". $email ."', ";
+		$sql.= "'". $diachi ."', ";
+		$sql.= "now(), ";
+		$sql.= "'". $idpage ."')";
+
+		$data = $this->InsertDeleteUpdateQuery($sql);
 		return $data;
 	}
 	
@@ -451,6 +533,13 @@ class App_Models_DaugiaModel {
 		return count($data);
 	}
 
+	public function thongTinTrang($idpage)
+	{
+		$sql = "select page_name, link_page from ishali_pages where id_fb_page = '". $idpage ."'";
+		$data = $this->SelectQuery($sql);
+		return $data;
+	}
+	
 }
 
 

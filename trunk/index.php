@@ -12,13 +12,13 @@ define('CONFIG_PATH', APPLICATION_PATH . '/configs');
 define('LAYOUT_PATH', APPLICATION_PATH . '/layouts');
 
 
-define('LINK_APPS', 'http://www.facebook.com/Phtpht/app_535578746483923');
+
 define('APP_DOMAIN', 'http://localhost/appfb/ishalidaugia');
 define('FB_APP_DOMAIN', 'http://apps.facebook.com/ishalidaugia');
 
-define('ROOT_DOMAIN', APP_DOMAIN);
+define('ROOT_DOMAIN', FB_APP_DOMAIN);
 
-define('APP_ID', '254387861355717');
+define('APP_ID', '195198003958238');
 
 define('PATH_UPLOAD', PATH_PUBLIC . '/images');
 define('IMAGE_WIDTH', 200);

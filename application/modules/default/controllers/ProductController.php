@@ -6,7 +6,7 @@ class ProductController extends App_Controller_FrontController {
     }
 
     public function indexAction() {
-		echo $idpage = $_SESSION['idpage'];
+		$idpage = $_SESSION['idpage'];
 		$idPD = $_GET["idPD"];
 
 		$daugia = App_Models_DaugiaModel::getInstance();

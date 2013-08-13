@@ -280,10 +280,10 @@ class AjaxdaugiaController extends App_Controller_FrontController {
 		$sql.= "username = '". $username ."'";
 		$data = $daugia->ThucThiTruyVan($sql);
 		//echo $data[0]['iduser'];
-		
+
 		if(count($data) >= 1)
 		{
-			$sql = "Update ishali_bid_user set `password` = '". sha1(123456). "' where iduserFB = ". $iduserfb ."' and username = '". $username ."'";
+			$sql = "Update ishali_bid_user set `password` = '". sha1(123456). "' where iduserFB = '". $iduserfb ."' and username = '". $username ."'";
 			$data = $daugia->ThucThiTruyVan($sql);
 			echo 1;
 		}
